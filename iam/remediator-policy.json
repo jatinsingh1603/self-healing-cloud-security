@@ -1,0 +1,31 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SelfHealRemediatorAllow",
+      "Effect": "Allow",
+      "Action": [
+        "*:Describe*",
+        "*:Get*",
+        "*:Head*",
+        "*:List*",
+        "cloudtrail:CreateTrail",
+        "cloudtrail:StartLogging",
+        "cloudtrail:UpdateTrail",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "iam:CreatePolicyVersion",
+        "iam:DeletePolicyVersion",
+        "iam:PutRolePolicy",
+        "iam:PutUserPolicy",
+        "s3:CreateBucket",
+        "s3:PutBucketAcl",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketVersioning",
+        "s3:PutEncryptionConfiguration",
+        "sts:GetCallerIdentity"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "_about": "Manual review of every disagreement between Checkov and the detector. action: flip = Checkov label is wrong and is replaced; exclude = label depends on operator input and is removed from the adjudicated set. Raw Checkov results are always reported alongside.",
+  "items": [
+    {"dataset": "sadcloud", "rule": "SG_OPEN_SSH", "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all", "action": "flip", "label": 0,
+     "reason": "Ingress is protocol=icmp only. ICMP has no TCP port 22, so SSH is not reachable. Checkov false positive."},
+    {"dataset": "sadcloud", "rule": "SG_OPEN_RDP", "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all", "action": "flip", "label": 0,
+     "reason": "Ingress is protocol=icmp only, so TCP 3389 is not reachable. Checkov false positive."},
+    {"dataset": "sadcloud", "rule": "SG_OPEN_SSH", "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self", "action": "flip", "label": 1,
+     "reason": "protocol=-1 from 0.0.0.0/0 allows every protocol and port including TCP 22 (the extra self=true does not narrow it). Checkov false negative."},
+    {"dataset": "sadcloud", "rule": "SG_OPEN_RDP", "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self", "action": "flip", "label": 1,
+     "reason": "protocol=-1 from 0.0.0.0/0 includes TCP 3389. Checkov false negative."},
+    {"dataset": "sadcloud", "rule": "SG_OPEN_ALL_PORTS", "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self", "action": "flip", "label": 1,
+     "reason": "protocol=-1 from 0.0.0.0/0 is all traffic. Checkov CKV_AWS_277 only matches port -1, missing from_port=0/to_port=0 with protocol -1."},
+    {"dataset": "sadcloud", "rule": "SG_OPEN_ALL_PORTS", "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all", "action": "flip", "label": 1,
+     "reason": "Same as above: protocol=-1 from 0.0.0.0/0. Checkov even flags this group for SSH (CKV_AWS_24) but not for all ports, which is inconsistent."},
+    {"dataset": "sadcloud", "rule": "S3_VERSIONING_DISABLED", "key": "/modules/aws/s3/main.tf::aws_s3_bucket.main", "action": "flip", "label": 0,
+     "reason": "versioning.enabled = var.no_versioning ? false : true and no_versioning defaults to false, so versioning is ON. Checkov did not resolve the conditional."},
+    {"dataset": "cloudgoat", "rule": "*", "key_contains": "cg_whitelist", "action": "exclude",
+     "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."}
+  ]
+}

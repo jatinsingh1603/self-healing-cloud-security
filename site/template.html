@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-Healing Cloud Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#ffffff; --panel:#ffffff; --panel2:#f6f7f9; --line:#e6e8ec; --line2:#d5d9e0;
+  --fg:#111827; --mut:#5f6b7a; --dim:#8b95a3; --acc:#1f4fd1;
+  --ok:#1e7d4f; --bad:#b42318; --warn:#9a6700; --info:#1f4fd1; --vio:#6941c6; --cyan:#0e7490;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace; --sans:'Inter',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:26px;height:58px}
+nav .brand{font-weight:600;font-size:15px;display:flex;gap:10px;align-items:center}
+nav .dot{width:18px;height:18px;border-radius:4px;background:var(--fg);position:relative}
+nav .dot:after{content:"";position:absolute;inset:5px;border:2px solid #fff;border-radius:50%}
+nav .links{display:flex;gap:24px;margin-left:auto;font-size:14px}
+nav .links a{color:var(--mut)} nav .links a:hover{color:var(--fg);text-decoration:none}
+header.hero{padding:64px 0 48px;border-bottom:1px solid var(--line);background:#fafbfc}
+.eyebrow{font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+h1{font-size:clamp(38px,5vw,56px);line-height:1.08;letter-spacing:-.025em;margin:12px 0 16px;font-weight:600}
+h2{font-size:28px;letter-spacing:-.015em;margin:6px 0 8px;font-weight:600}
+h3{font-size:16px;margin:0 0 8px;font-weight:600}
+.lead{font-size:18px;color:#374151;max-width:780px;font-weight:400}
+.team{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:22px;color:var(--mut);font-size:14px}
+.team b{color:var(--fg);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:40px;background:#fff}
+.kpi{padding:22px 24px;border-right:1px solid var(--line)} .kpi:last-child{border-right:0}
+.kpi .v{font-size:32px;font-weight:600;letter-spacing:-.02em}
+.kpi .l{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.45}
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.sub{color:var(--mut);max-width:820px;margin:0 0 28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.demo{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+.ctrl{position:sticky;top:78px;background:var(--panel2)}
+.ctrl .grp{margin-bottom:18px}
+.ctrl label.t{display:block;font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin-bottom:8px}
+.seg{display:flex;background:#fff;border:1px solid var(--line2);border-radius:6px;padding:2px}
+.seg button{flex:1;background:none;border:0;color:var(--mut);padding:7px 6px;border-radius:4px;font:500 13px var(--sans);cursor:pointer}
+.seg button.on{background:var(--fg);color:#fff}
+.tog{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;font-size:14px;cursor:pointer;user-select:none}
+.tog .sw{width:34px;height:18px;border-radius:18px;background:var(--line2);position:relative;transition:.15s;flex:none}
+.tog .sw:after{content:"";position:absolute;width:14px;height:14px;top:2px;left:2px;border-radius:50%;background:#fff;transition:.15s}
+.tog.on .sw{background:var(--acc)} .tog.on .sw:after{left:18px}
+.tog small{display:block;color:var(--dim);font-size:12px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line2);background:#fff;color:var(--fg);padding:10px 16px;border-radius:6px;font:600 14px var(--sans);cursor:pointer;width:100%}
+.btn:hover{border-color:#b9c0ca;background:#fafbfc}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn.pri:hover{background:#1a43b3}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:8px}
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:16px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.stage{padding:12px 16px;background:#fff;transition:.2s;border-right:1px solid var(--line);border-top:3px solid transparent}
+.stage:last-child{border-right:0}
+.stage .n{font:600 11px var(--sans);color:var(--dim)}
+.stage .h{font-weight:600}
+.stage .d{font-size:12px;color:var(--mut)}
+.stage.act{background:#f1f5ff;border-top-color:var(--acc)}
+.acct{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:16px}
+.res{border:1px solid var(--line);background:#fff;border-radius:8px;padding:12px 14px;transition:border-color .3s,background .3s;border-left-width:3px}
+.res .top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.res .ico{font:600 10px var(--sans);padding:2px 6px;border-radius:4px;background:var(--panel2);color:var(--mut);border:1px solid var(--line)}
+.res .nm{font:500 13px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .props{display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:12.5px}
+.res .props span:nth-child(odd){color:var(--mut)}
+.res.bad{border-left-color:var(--bad)} .res.good{border-left-color:var(--ok)}
+.res.flash{background:#f0faf4}
+.res.focus{border-color:var(--acc);border-left-color:var(--acc)}
+.v-ok{color:var(--ok);font-weight:500} .v-bad{color:var(--bad);font-weight:500} .v-warn{color:var(--warn);font-weight:500}
+.console{background:var(--panel2);border:1px solid var(--line);border-radius:8px;height:330px;overflow:auto;padding:12px 14px;font:12.5px/1.7 var(--mono);color:#1f2937}
+.console .l{white-space:pre-wrap}
+.c-mut{color:var(--dim)} .c-ok{color:var(--ok)} .c-bad{color:var(--bad)} .c-warn{color:var(--warn)} .c-info{color:var(--acc);font-weight:500} .c-vio{color:var(--vio)} .c-cyan{color:var(--cyan)}
+.chip{display:inline-block;font:600 10.5px var(--sans);padding:2px 7px;border-radius:4px;letter-spacing:.02em;border:1px solid}
+.s-HEALED{background:#ecf7f0;color:var(--ok);border-color:#c6e7d3}
+.s-ALREADY_RESOLVED{background:#ecf6f8;color:var(--cyan);border-color:#c5e3ea}
+.s-ESCALATED{background:#fdf6e7;color:var(--warn);border-color:#f0dfb5}
+.s-BLOCKED{background:#f3f0fb;color:var(--vio);border-color:#ddd3f5}
+.s-NOT_HEALED,.s-ERROR{background:#fdf0ef;color:var(--bad);border-color:#f3cfcb}
+.sev{font:600 10.5px var(--sans)} .sev-CRITICAL{color:#8f1d14} .sev-HIGH{color:var(--bad)} .sev-MEDIUM{color:var(--warn)} .sev-LOW{color:var(--mut)}
+.summary{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.approve{display:none;margin-top:12px;border:1px solid #f0dfb5;background:#fffaf0;border-radius:8px;padding:14px}
+.approve.show{display:block}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);text-align:left;padding:10px;border-bottom:1px solid var(--line2);position:sticky;top:0;background:#fafbfc}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+td.mono,.mono{font-family:var(--mono);font-size:12px}
+.tscroll{max-height:460px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+#dsTable td:nth-child(5){max-width:230px;word-break:break-all}#dsTable td:nth-child(3){max-width:300px;word-break:break-word}
+.chartbox{position:relative;height:300px}
+.note{font-size:13px;color:var(--mut);margin-top:10px}
+.pill{display:inline-block;padding:2px 9px;border:1px solid var(--line2);border-radius:4px;font-size:12px;color:var(--mut);margin:0 6px 6px 0;background:#fff}
+.ds-tabs{display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.ds-tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);padding:10px 16px;cursor:pointer;font:500 14px var(--sans);margin-bottom:-1px}
+.ds-tabs button.on{color:var(--fg);border-bottom-color:var(--acc)}
+svg text{font-family:var(--sans)}
+footer{padding:36px 0 60px;color:var(--mut);font-size:13px;background:#fafbfc}
+@media (max-width:980px){.demo{grid-template-columns:1fr}.ctrl{position:static}.grid2,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pipe{grid-template-columns:1fr 1fr}nav .links{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand"><span class="dot"></span>Self-Healing Cloud Security</div>
+  <div class="links"><a href="#demo">Live demo</a><a href="#datasets">Dataset runs</a><a href="#results">Results</a><a href="#method">Method</a><a href="#code">Code</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">CSL-384 Cloud Security Essentials - Final project - NorthCap University</div>
+  <h1>Self-Healing<br>Cloud Security</h1>
+  <p class="lead">An AI-driven closed loop that <b>detects</b> AWS misconfigurations, <b>decides</b> on an approved fix, <b>applies</b> it through a least-privilege identity and <b>verifies</b> the result with an independent re-check. Evaluated on three public, deliberately vulnerable AWS datasets.</p>
+  <div class="team"><span><b>Jatin</b> 23CSU141</span><span><b>Deepanshu</b> 23CSU091</span><span><b>Yana</b> 23CSU395</span><span><b>Ishant</b> 23CSU130</span><span><b>Indresh</b> 23CSU128</span></div>
+  <div class="kpis" id="kpis"></div>
+</div></header>
+
+<!-- ======================================================= DEMO -->
+<section id="demo"><div class="wrap">
+  <div class="eyebrow">01 - Live demo</div>
+  <h2>Watch the loop heal an AWS account</h2>
+  <p class="sub">An in-browser replica of the engine running the same rules and the same approved tools as the Python code. Pick a scenario, set how reliable the AI is, switch the safety layers on or off, then press <b>Run self-heal</b>.</p>
+  <div class="demo">
+    <div class="ctrl card">
+      <div class="grp"><label class="t">Scenario</label>
+        <div class="seg" id="scen"><button data-v="deck" class="on">3 deck cases</button><button data-v="full">Full lab</button></div>
+      </div>
+      <div class="grp"><label class="t">Decision maker</label>
+        <div class="seg" id="sel"><button data-v="rule" class="on">Fixed rules</button><button data-v="ai">AI agent</button></div>
+        <div id="aiBox" style="display:none;margin-top:12px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span>AI mistake rate</span><b id="errv">20%</b></div>
+          <input type="range" id="err" min="0" max="100" step="5" value="20">
+          <div class="note" style="margin:2px 0 0">Simulates an LLM that sometimes picks the wrong tool or invents one.</div>
+        </div>
+      </div>
+      <div class="grp"><label class="t">Safety layers</label>
+        <div class="tog on" data-k="guardrail"><div>Tool guardrail<small>AI may only pick an approved tool for that rule</small></div><span class="sw"></span></div>
+        <div class="tog on" data-k="fallback"><div>Safe fallback<small>blocked AI choice falls back to fixed rule</small></div><span class="sw"></span></div>
+        <div class="tog on" data-k="verify"><div>Independent re-check<small>separate read-only identity confirms the fix</small></div><span class="sw"></span></div>
+      </div>
+      <div class="grp"><label class="t">Inject cloud faults</label>
+        <div class="tog" data-k="partial"><div>Partial fix<small>API says 200 OK, change only half applied</small></div><span class="sw"></span></div>
+        <div class="tog" data-k="stale"><div>Delayed propagation<small>first 2 re-checks read stale state</small></div><span class="sw"></span></div>
+      </div>
+      <div class="grp"><label class="t">Speed</label>
+        <div class="seg" id="spd"><button data-v="1.6">Slow</button><button data-v="1" class="on">Normal</button><button data-v="0.25">Fast</button></div>
+      </div>
+      <button class="btn pri" id="runBtn">Run self-heal</button>
+      <div class="row" style="margin-top:8px"><button class="btn" id="resetBtn">Reset account</button><button class="btn" id="driftBtn">Cause drift</button></div>
+    </div>
+    <div>
+      <div class="pipe">
+        <div class="stage" id="st-detect"><div class="n">01</div><div class="h">Detect</div><div class="d">read-only scan of live config</div></div>
+        <div class="stage" id="st-decide"><div class="n">02</div><div class="h">Decide</div><div class="d">pick one approved tool</div></div>
+        <div class="stage" id="st-fix"><div class="n">03</div><div class="h">Fix</div><div class="d">least-privilege remediator</div></div>
+        <div class="stage" id="st-verify"><div class="n">04</div><div class="h">Verify</div><div class="d">independent re-check</div></div>
+      </div>
+      <div class="acct" id="acct"></div>
+      <div class="console" id="con"></div>
+      <div class="summary" id="sum"></div>
+      <div class="approve" id="approve">
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px"><b class="v-warn">Human approval needed</b><div class="note" style="margin:4px 0 0" id="approveTxt"></div></div>
+          <div style="display:flex;gap:8px"><button class="btn" style="width:auto" id="denyBtn">Keep escalated</button><button class="btn pri" style="width:auto" id="okBtn">Approve fix</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ======================================================= DATASETS -->
+<section id="datasets"><div class="wrap">
+  <div class="eyebrow">02 - Real datasets</div>
+  <h2>Full runs on three public vulnerable-by-design AWS datasets</h2>
+  <p class="sub">Each dataset's Terraform is deployed into an emulated AWS account (moto, real boto3 API calls), then the loop runs end to end. Every row below is a finding from that recorded run: what was found, which tool fixed it, the exact AWS API calls the remediator made and the verified outcome.</p>
+  <div class="ds-tabs" id="dsTabs"></div>
+  <div class="grid3" id="dsCards" style="margin-bottom:16px"></div>
+  <div class="tscroll"><table id="dsTable"><thead><tr><th>Severity</th><th>Rule</th><th>Terraform resource</th><th>Tool</th><th>AWS calls made</th><th>Status</th><th class="num">ms</th></tr></thead><tbody></tbody></table></div>
+</div></section>
+
+<!-- ======================================================= RESULTS -->
+<section id="results"><div class="wrap">
+  <div class="eyebrow">03 - Experiments and results</div>
+  <h2>How accurate and how safe is it?</h2>
+  <p class="sub" id="resSub"></p>
+
+  <h3 style="margin-top:6px">E1 - Detection accuracy against ground truth</h3>
+  <p class="note" style="margin:0 0 14px">Ground truth = Checkov (open-source IaC scanner) labels for the same CIS properties, scored per (resource, rule). <b>Raw</b> uses Checkov's labels as they are. <b>Adjudicated</b> uses the same labels after we reviewed every disagreement by hand (table further down).</p>
+  <div class="grid2">
+    <div class="card"><div class="chartbox"><canvas id="c-acc"></canvas></div></div>
+    <div class="card"><div class="chartbox"><canvas id="c-rule"></canvas></div></div>
+  </div>
+  <div class="card" style="margin-top:18px;overflow:auto"><table id="accTable"></table></div>
+
+  <h3 style="margin-top:40px">E2 - End-to-end remediation and timing</h3>
+  <div class="grid2">
+    <div class="card"><div class="chartbox"><canvas id="c-heal"></canvas></div></div>
+    <div class="card"><div class="chartbox"><canvas id="c-time"></canvas></div></div>
+  </div>
+
+  <h3 style="margin-top:40px">E3 - What if the AI picks the wrong tool?</h3>
+  <p class="note" style="margin:0 0 14px">The AI selector is replaced with a simulated LLM that errs at a set rate (30% of errors invent a tool such as <span class="mono">terminate_instances</span>, the rest pick a real but wrong tool). Pooled over all three datasets and repeated runs.</p>
+  <div class="grid2">
+    <div class="card"><div class="chartbox"><canvas id="c-e3a"></canvas></div></div>
+    <div class="card"><div class="chartbox"><canvas id="c-e3b"></canvas></div></div>
+  </div>
+
+  <h3 style="margin-top:40px">E4 - Cloud faults: why verification matters</h3>
+  <div class="grid2">
+    <div class="card"><div class="chartbox"><canvas id="c-e4"></canvas></div></div>
+    <div class="card"><h3>E5 - Least privilege</h3><div id="e5"></div></div>
+  </div>
+
+  <h3 style="margin-top:40px">Every disagreement with the ground truth, reviewed</h3>
+  <div class="tscroll"><table id="adjTable"><thead><tr><th>Dataset</th><th>Rule</th><th>Resource</th><th>Checkov</th><th>Adjudicated</th><th>Reason</th></tr></thead><tbody></tbody></table></div>
+</div></section>
+
+<!-- ======================================================= METHOD -->
+<section id="method"><div class="wrap">
+  <div class="eyebrow">04 - Methodology</div>
+  <h2>Architecture</h2>
+  <p class="sub">Three identities, one registry, one loop. The component that judges "healed" can never change the resource it judges, and the component that changes resources can only call the API actions its approved tools need.</p>
+  <div class="card" style="padding:16px 10px 4px"><svg viewBox="0 0 1180 330" width="100%" id="arch"></svg></div>
+  <h3 style="margin-top:34px">Approved tool registry</h3>
+  <div class="tscroll" style="max-height:none"><table id="toolTable"><thead><tr><th>Tool</th><th>Fixes rule</th><th>Risk</th><th>IAM actions granted</th><th>What it does</th></tr></thead><tbody></tbody></table></div>
+</div></section>
+
+<section id="code" style="border-bottom:0"><div class="wrap">
+  <div class="eyebrow">05 - Code</div>
+  <h2>Run it yourself</h2>
+  <div class="grid2">
+    <div class="card"><pre class="mono" style="margin:0;white-space:pre-wrap;color:#1f2937;background:#f6f7f9;padding:16px;border-radius:6px">git clone __REPO__
+cd self-healing-cloud-security
+pip install -r requirements.txt
+
+python -m selfheal demo             # 3 deck scenarios + extras
+python -m selfheal demo --approve   # approve the HIGH-risk IAM fix
+python -m pytest -q                 # 11 tests
+
+bash experiments/get_datasets.sh    # clone the 3 public datasets
+python experiments/run_all.py       # all experiments -> results/
+python experiments/make_charts.py   # graphs for the deck</pre></div>
+    <div class="card"><h3>Datasets</h3><div id="dsLinks"></div><h3 style="margin-top:18px">Repository</h3><p class="note" style="margin:0"><a href="__REPO__">__REPO__</a></p></div>
+  </div>
+</div></section>
+<footer><div class="wrap">CSL-384 Cloud Security Essentials, NorthCap University, Gurugram. Faculty: Arun Kumar Jindal. Results generated <span id="gen"></span>.</div></footer>
+
+<script>
+const RESULTS = /*RESULTS*/null;
+const REPLAY = /*REPLAY*/null;
+const TOOLS = /*TOOLS*/null;
+</script>
+<script>
+/* ======================================================= helpers */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const pct=x=>(x*100).toFixed(x===1||x===0?0:1)+'%';
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms*SPEED));
+let SPEED=1;
+
+/* ======================================================= KPIs */
+(function kpis(){
+  const ds=Object.values(RESULTS.datasets);
+  const sum=k=>ds.reduce((a,d)=>a+d.accuracy_raw.overall[k],0);
+  const tp=sum('tp'),fp=sum('fp'),fn=sum('fn'),tn=sum('tn');
+  const p=tp/(tp+fp), r=tp/(tp+fn), f1=2*p*r/(p+r), acc=(tp+tn)/(tp+fp+fn+tn);
+  const e2=Object.values(RESULTS.e2); const heal=e2.reduce((a,d)=>a+d.heal_rate_mean,0)/e2.length;
+  const nf=e2.reduce((a,d)=>a+d.runs[0].findings,0);
+  const e4=RESULTS.e4.find(x=>x.scenario==='all faults'&&!x.verification);
+  const e4v=RESULTS.e4.find(x=>x.scenario==='all faults'&&x.verification);
+  $('#kpis').innerHTML=[
+    [pct(acc),`detection accuracy vs raw Checkov labels (F1 ${f1.toFixed(3)}, ${tp+fp+fn+tn} labels, 3 datasets)`],
+    [pct(heal),`of ${nf} auto-fixable findings healed and independently verified`],
+    [pct(e4v.false_heal_claim_rate),`false "healed" claims under injected cloud faults with verification (${pct(e4.false_heal_claim_rate)} without)`],
+    [RESULTS.e5.blocked+'/'+RESULTS.e5.out_of_policy_calls,'out-of-policy API calls blocked by the least-privilege guard'],
+  ].map(([v,l])=>`<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
+  $('#gen').textContent=RESULTS.generated;
+})();
+
+/* ======================================================= DEMO ENGINE (mirrors selfheal/) */
+const SEV={S3_PUBLIC_ACCESS:'HIGH',S3_VERSIONING_DISABLED:'LOW',S3_NO_KMS_ENCRYPTION:'MEDIUM',SG_OPEN_SSH:'HIGH',SG_OPEN_RDP:'HIGH',SG_OPEN_ALL_PORTS:'CRITICAL',CLOUDTRAIL_NOT_LOGGING:'HIGH',CLOUDTRAIL_NOT_MULTI_REGION:'MEDIUM',CLOUDTRAIL_NO_LOG_VALIDATION:'MEDIUM',IAM_ADMIN_WILDCARD:'CRITICAL'};
+const ORDER={CRITICAL:0,HIGH:1,MEDIUM:2,LOW:3};
+const ALLOWED={}; for(const t of TOOLS) ALLOWED[t.fixes]=t.name;
+const TOOLMAP=Object.fromEntries(TOOLS.map(t=>[t.name,t]));
+const FAKE=['delete_bucket','terminate_instances','disable_guardduty','fix_everything'];
+
+function seed(kind){
+  const A={buckets:[],sgs:[],trails:[],policies:[]};
+  A.buckets.push({id:'customer-exports',acl:'public-read',pab:false,versioning:true,kms:true});
+  A.sgs.push({id:'sg-0a1f web-server',rules:[{proto:'tcp',from:22,to:22,cidr:'0.0.0.0/0'},{proto:'tcp',from:443,to:443,cidr:'0.0.0.0/0'}]});
+  A.trails.push({id:'org-audit',logging:false,multi:true,validation:true});
+  if(kind==='full'){
+    A.buckets.push({id:'ml-training-data',acl:'private',pab:false,versioning:false,kms:false});
+    A.sgs.push({id:'sg-9c2e legacy-windows',rules:[{proto:'-1',from:0,to:65535,cidr:'0.0.0.0/0'}]});
+    A.trails.push({id:'eu-trail',logging:true,multi:false,validation:false});
+    A.policies.push({id:'dev-full-access',action:'*'});
+  }
+  return A;
+}
+let ACC=seed('deck'), STATE={scen:'deck',sel:'rule',err:.2,guardrail:true,fallback:true,verify:true,partial:false,stale:false};
+let staleSeen={}, running=false, pendingApproval=[], LAST={};
+
+const covers=(r,p)=>r.proto==='-1'||(r.proto==='tcp'&&r.from<=p&&p<=r.to);
+const world=r=>r.cidr==='0.0.0.0/0'||r.cidr==='::/0';
+function scan(A){
+  const F=[];
+  for(const b of A.buckets){
+    if(!b.pab) F.push({rule:'S3_PUBLIC_ACCESS',type:'bucket',id:b.id,ev:`block-public-access=off, acl=${b.acl}`});
+    if(!b.versioning) F.push({rule:'S3_VERSIONING_DISABLED',type:'bucket',id:b.id,ev:'versioning=off'});
+    if(!b.kms) F.push({rule:'S3_NO_KMS_ENCRYPTION',type:'bucket',id:b.id,ev:'sse=none'});
+  }
+  for(const g of A.sgs){
+    const w=g.rules.filter(world);
+    if(w.some(r=>covers(r,22))) F.push({rule:'SG_OPEN_SSH',type:'sg',id:g.id,ev:'tcp/22 from 0.0.0.0/0'});
+    if(w.some(r=>covers(r,3389))) F.push({rule:'SG_OPEN_RDP',type:'sg',id:g.id,ev:'tcp/3389 from 0.0.0.0/0'});
+    if(w.some(r=>r.proto==='-1'||(r.from===0&&r.to===65535))) F.push({rule:'SG_OPEN_ALL_PORTS',type:'sg',id:g.id,ev:'all ports from 0.0.0.0/0'});
+  }
+  for(const t of A.trails){
+    if(!t.logging) F.push({rule:'CLOUDTRAIL_NOT_LOGGING',type:'trail',id:t.id,ev:'IsLogging=false'});
+    if(!t.multi) F.push({rule:'CLOUDTRAIL_NOT_MULTI_REGION',type:'trail',id:t.id,ev:'IsMultiRegionTrail=false'});
+    if(!t.validation) F.push({rule:'CLOUDTRAIL_NO_LOG_VALIDATION',type:'trail',id:t.id,ev:'LogFileValidation=false'});
+  }
+  for(const p of A.policies) if(p.action==='*') F.push({rule:'IAM_ADMIN_WILDCARD',type:'policy',id:p.id,ev:'Allow Action:* Resource:*'});
+  return F.map(f=>({...f,sev:SEV[f.rule],key:f.rule+':'+f.id}));
+}
+const present=(A,f)=>scan(A).some(x=>x.key===f.key);
+function find(A,f){return ({bucket:A.buckets,sg:A.sgs,trail:A.trails,policy:A.policies})[f.type].find(x=>x.id===f.id)}
+const APPLY={
+  fix_s3_public_access:(o,part)=>{o.pab=part?'partial':true; if(!part)o.acl='private'; return part?['s3:PutBucketPublicAccessBlock (2 of 4 flags)']:['s3:PutBucketPublicAccessBlock','s3:PutBucketAcl']},
+  enable_s3_versioning:(o,part)=>{if(!part)o.versioning=true;return['s3:PutBucketVersioning']},
+  enable_s3_kms_encryption:(o,part)=>{if(!part)o.kms=true;return['s3:PutEncryptionConfiguration']},
+  fix_open_ssh:(o,part)=>{if(!part)o.rules=o.rules.filter(r=>!(world(r)&&covers(r,22)));return['ec2:DescribeSecurityGroups','ec2:RevokeSecurityGroupIngress']},
+  fix_open_rdp:(o,part)=>{if(!part)o.rules=o.rules.filter(r=>!(world(r)&&covers(r,3389)));return['ec2:DescribeSecurityGroups','ec2:RevokeSecurityGroupIngress']},
+  fix_open_all_ingress:(o,part)=>{if(!part)o.rules=o.rules.filter(r=>!(world(r)&&(r.proto==='-1'||(r.from===0&&r.to===65535))));return['ec2:DescribeSecurityGroups','ec2:RevokeSecurityGroupIngress']},
+  enable_cloudtrail:(o,part)=>{if(!part)o.logging=true;return['cloudtrail:StartLogging']},
+  set_cloudtrail_multiregion:(o,part)=>{if(!part)o.multi=true;return['cloudtrail:UpdateTrail']},
+  enable_cloudtrail_log_validation:(o,part)=>{if(!part)o.validation=true;return['cloudtrail:UpdateTrail']},
+  quarantine_admin_policy:(o,part)=>{if(!part)o.action='Deny *';return['iam:CreatePolicyVersion']},
+};
+function pickAI(f){
+  if(Math.random()>=STATE.err) return ALLOWED[f.rule];
+  if(Math.random()<.3) return FAKE[Math.floor(Math.random()*FAKE.length)];
+  const w=TOOLS.map(t=>t.name).filter(n=>n!==ALLOWED[f.rule]); return w[Math.floor(Math.random()*w.length)];
+}
+
+/* ---------------- rendering */
+function propRow(k,v,ok){return `<span>${k}</span><span class="${ok===true?'v-ok':ok===false?'v-bad':'v-warn'}">${esc(v)}</span>`}
+function renderAcct(flashId,focusId){
+  const F=scan(ACC), bad=new Set(F.map(f=>f.id));
+  const card=(ico,id,props)=>`<div class="res ${bad.has(id)?'bad':'good'} ${flashId===id?'flash':''} ${focusId===id?'focus':''}" data-id="${esc(id)}"><div class="top"><span class="ico">${ico}</span><span class="nm">${esc(id)}</span></div><div class="props">${props}</div></div>`;
+  let h='';
+  for(const b of ACC.buckets) h+=card('S3',b.id,propRow('Block Public Access',b.pab===true?'ON (4/4)':b.pab==='partial'?'2/4 only':'OFF',b.pab===true?true:false)+propRow('ACL',b.acl,b.acl==='private'||b.pab===true)+propRow('Versioning',b.versioning?'Enabled':'Off',b.versioning)+propRow('Encryption',b.kms?'SSE-KMS':'none',b.kms));
+  for(const g of ACC.sgs){const rs=g.rules.length?g.rules.map(r=>propRow(r.proto==='-1'?'all traffic':`tcp ${r.from===r.to?r.from:r.from+'-'+r.to}`,r.cidr,!(world(r)&&r.from!==443))).join(''):propRow('ingress','none',true);h+=card('SG',g.id,rs)}
+  for(const t of ACC.trails) h+=card('TRAIL',t.id,propRow('Logging',t.logging?'ON':'OFF',t.logging)+propRow('Multi-region',t.multi?'yes':'no',t.multi)+propRow('Log validation',t.validation?'on':'off',t.validation));
+  for(const p of ACC.policies) h+=card('IAM',p.id,propRow('Statement',p.action==='*'?'Allow *:*':'Deny *:* (quarantined)',p.action!=='*'));
+  $('#acct').innerHTML=h;
+}
+function log(html,cls){const d=document.createElement('div');d.className='l '+(cls||'');d.innerHTML=html;$('#con').appendChild(d);$('#con').scrollTop=1e9}
+function stage(s){$$('.stage').forEach(e=>e.classList.toggle('act',e.id==='st-'+s))}
+const chip=s=>`<span class="chip s-${s}">${s}</span>`;
+
+/* ---------------- the loop */
+async function heal(f, approved){
+  const sel=STATE.sel==='ai'?'ai':'rule';
+  if(!present(ACC,f)){log(`  ${chip('ALREADY_RESOLVED')} <span class="c-mut">${f.rule} on ${esc(f.id)} was cleared by an earlier fix</span>`);return 'ALREADY_RESOLVED'}
+  stage('decide'); renderAcct(null,f.id);
+  let tool=sel==='ai'?pickAI(f):ALLOWED[f.rule];
+  await sleep(420);
+  log(`<span class="c-info">decide</span>  ${f.rule} on <b>${esc(f.id)}</b> → ${sel==='ai'?'AI picked':'rule picked'} <b>${tool}</b>`);
+  const valid=TOOLMAP[tool]&&ALLOWED[f.rule]===tool;
+  if(!valid&&STATE.guardrail){
+    const why=TOOLMAP[tool]?`approved, but not for ${f.rule}`:'not in the approved registry';
+    if(STATE.fallback){log(`  <span class="c-vio">guardrail</span> rejected ${tool} (${why}) → safe fallback to <b>${ALLOWED[f.rule]}</b>`);tool=ALLOWED[f.rule]}
+    else{log(`  ${chip('BLOCKED')} <span class="c-vio">guardrail rejected ${tool}: ${why}</span>`);return 'BLOCKED'}
+  }
+  if(!TOOLMAP[tool]){log(`  ${chip('ERROR')} <span class="c-bad">no guardrail: AI asked for "${tool}", which does not exist. Nothing ran.</span>`);return 'ERROR'}
+  const T=TOOLMAP[tool];
+  if(T.risk==='HIGH'&&!approved){log(`  ${chip('ESCALATED')} <span class="c-warn">${tool} is HIGH risk: waiting for human approval</span>`);pendingApproval.push(f);return 'ESCALATED'}
+  let attempts=0, healed=false;
+  while(attempts<(STATE.verify?2:1)&&!healed){
+    attempts++;
+    stage('fix'); await sleep(450);
+    // wrong-but-real tool runs against the resource it was given
+    const target=find(ACC,f);
+    const partial=STATE.partial&&attempts===1;
+    const okType=T.fixes.split('_')[0]===f.rule.split('_')[0]||(T.fixes.startsWith('CLOUDTRAIL')&&f.rule.startsWith('CLOUDTRAIL'));
+    const calls=okType?APPLY[tool](target,partial):[`${tool}: ResourceNotFound / no effect on ${f.type}`];
+    log(`<span class="c-info">fix   </span>  remediator ran <b>${tool}</b>${attempts>1?' (retry)':''}: <span class="c-mut">${calls.join(', ')}</span>${partial?' <span class="c-warn">[API: 200 OK]</span>':''}`);
+    renderAcct(null,f.id);
+    if(!STATE.verify){healed=true;log(`  ${chip('HEALED')} <span class="c-mut">(claimed from API response only, no re-check)</span>`);return present(ACC,f)?'FALSE_CLAIM':'HEALED'}
+    stage('verify');
+    for(let i=0;i<4;i++){
+      await sleep(260);
+      staleSeen[f.key]=(staleSeen[f.key]||0)+1;
+      const stale=STATE.stale&&staleSeen[f.key]<=2;
+      const gone=!stale&&!present(ACC,f);
+      log(`<span class="c-cyan">verify</span>  read-only re-check #${i+1}: ${gone?'<span class="c-ok">setting confirmed</span>':stale?'<span class="c-warn">stale read, still old value</span>':'<span class="c-bad">still misconfigured</span>'}`);
+      if(gone){healed=true;break}
+      if(!stale) break;
+    }
+  }
+  const s=healed?'HEALED':'NOT_HEALED';
+  log(`  ${chip(s)} ${f.rule} on ${esc(f.id)}${attempts>1?` <span class="c-mut">after ${attempts} attempts</span>`:''}`);
+  if(healed){renderAcct(f.id);await sleep(220);renderAcct()}
+  return s;
+}
+async function run(){
+  if(running)return; running=true; $('#runBtn').disabled=true; $('#approve').classList.remove('show'); pendingApproval=[]; staleSeen={};
+  $('#con').innerHTML=''; $('#sum').innerHTML='';
+  stage('detect'); log('<span class="c-mut">$ selfheal run --identity SelfHealReader</span>');
+  await sleep(500);
+  const F=scan(ACC).sort((a,b)=>ORDER[a.sev]-ORDER[b.sev]);
+  log(`<span class="c-info">detect</span>  ${F.length} finding(s)`);
+  for(const f of F) log(`  <span class="sev sev-${f.sev}">${f.sev.padEnd(8)}</span> ${f.rule.padEnd(30)} ${esc(f.id)}  <span class="c-mut">${esc(f.ev)}</span>`);
+  if(!F.length){log('<span class="c-ok">account is clean</span>');stage(null);running=false;$('#runBtn').disabled=false;return}
+  await sleep(500);
+  const C={};
+  for(const f of F){const s=await heal(f,false);C[s]=(C[s]||0)+1;await sleep(150)}
+  stage(null);
+  const left=scan(ACC).length, lying=C.FALSE_CLAIM||0;
+  if(lying){C.HEALED=(C.HEALED||0)+lying;delete C.FALSE_CLAIM}
+  log(`<span class="c-info">rescan</span>  ${left} finding(s) left in the account`);
+  if(lying) log(`<span class="c-bad">warning: ${lying} finding(s) were reported HEALED but are still misconfigured. This is what the independent re-check prevents.</span>`);
+  $('#sum').innerHTML=Object.entries(C).map(([k,v])=>`${chip(k)} <span style="margin-right:8px">${v}</span>`).join('')+`<span class="pill">findings left: ${left}</span>`+(lying?`<span class="pill" style="color:var(--bad);border-color:var(--bad)">false "healed" claims: ${lying}</span>`:'');
+  LAST=C;
+  if(pendingApproval.length){$('#approveTxt').textContent=pendingApproval.map(f=>`${f.rule} on ${f.id}: replace Allow *:* with a deny-all version (old version kept for rollback).`).join(' ');$('#approve').classList.add('show')}
+  running=false; $('#runBtn').disabled=false;
+}
+$('#okBtn').onclick=async()=>{$('#approve').classList.remove('show');const P=pendingApproval;pendingApproval=[];running=true;for(const f of P){log(`<span class="c-warn">human</span>  approved quarantine_admin_policy for ${esc(f.id)}`);const r=await heal(f,true);LAST.ESCALATED--;if(!LAST.ESCALATED)delete LAST.ESCALATED;LAST[r]=(LAST[r]||0)+1}stage(null);running=false;const left=scan(ACC).length;log(`<span class="c-info">rescan</span>  ${left} finding(s) left`);$('#sum').innerHTML=Object.entries(LAST).map(([k,v])=>`${chip(k)} <span style="margin-right:8px">${v}</span>`).join('')+`<span class="pill">findings left: ${left}</span>`};
+$('#denyBtn').onclick=()=>{$('#approve').classList.remove('show');log('<span class="c-warn">human</span>  kept escalated: no change made')};
+$('#runBtn').onclick=run;
+$('#resetBtn').onclick=()=>{if(running)return;ACC=seed(STATE.scen);$('#con').innerHTML='';$('#sum').innerHTML='';$('#approve').classList.remove('show');renderAcct();log('<span class="c-mut">account reset to the vulnerable starting state</span>')};
+$('#driftBtn').onclick=()=>{if(running)return;
+  const opts=[()=>{const b=ACC.buckets[0];b.pab=false;b.acl='public-read';return `someone re-opened ${b.id} to the public`},
+    ()=>{const g=ACC.sgs[0];g.rules.push({proto:'tcp',from:22,to:22,cidr:'0.0.0.0/0'});return `a developer added tcp/22 from 0.0.0.0/0 to ${g.id}`},
+    ()=>{const t=ACC.trails[0];t.logging=false;return `an attacker called StopLogging on ${t.id}`}];
+  log(`<span class="c-bad">drift</span>  ${opts[Math.floor(Math.random()*opts.length)]()}`);renderAcct()};
+function seg(id,fn){$$(`#${id} button`).forEach(b=>b.onclick=()=>{$$(`#${id} button`).forEach(x=>x.classList.remove('on'));b.classList.add('on');fn(b.dataset.v)})}
+seg('scen',v=>{STATE.scen=v;ACC=seed(v);$('#con').innerHTML='';$('#sum').innerHTML='';renderAcct()});
+seg('sel',v=>{STATE.sel=v;$('#aiBox').style.display=v==='ai'?'block':'none'});
+seg('spd',v=>SPEED=+v);
+$('#err').oninput=e=>{STATE.err=e.target.value/100;$('#errv').textContent=e.target.value+'%'};
+$$('.tog').forEach(t=>t.onclick=()=>{t.classList.toggle('on');STATE[t.dataset.k]=t.classList.contains('on')});
+renderAcct();
+log('<span class="c-mut">Emulated AWS account loaded. Red cards are misconfigured. Press "Run self-heal".</span>');
+
+/* ======================================================= DATASETS */
+(function datasets(){
+  const names=Object.keys(REPLAY);
+  $('#dsTabs').innerHTML=names.map((n,i)=>`<button data-d="${n}" class="${i?'':'on'}">${n}</button>`).join('');
+  function show(d){
+    $$('#dsTabs button').forEach(b=>b.classList.toggle('on',b.dataset.d===d));
+    const R=RESULTS.datasets[d], P=REPLAY[d], E=RESULTS.e2[d];
+    const c={};P.outcomes.forEach(o=>c[o.status]=(c[o.status]||0)+1);
+    const a=R.accuracy_raw.overall;
+    $('#dsCards').innerHTML=`
+      <div class="card"><div class="eyebrow">source</div><h3 style="margin-top:6px"><a href="${R.repo}">${R.repo.replace('https://github.com/','')}</a></h3>
+        <div class="note" style="margin:0">${R.by} - commit ${R.commit}<br>${R.resources_total} Terraform resources in ${R.modules} modules; ${R.resources_deployed} in-scope resources deployed</div></div>
+      <div class="card"><div class="eyebrow">detection vs Checkov (raw)</div><div style="font-size:30px;font-weight:600;margin-top:4px">${pct(a.accuracy)} <span style="font-size:15px;color:var(--mut);font-weight:400">accuracy</span></div>
+        <div class="note" style="margin:0">precision ${a.precision.toFixed(3)} - recall ${a.recall.toFixed(3)} - F1 ${a.f1.toFixed(3)} - n=${a.n}</div></div>
+      <div class="card"><div class="eyebrow">remediation (${RESULTS.runs} runs)</div><div style="font-size:30px;font-weight:600;margin-top:4px">${pct(E.heal_rate_mean)} <span style="font-size:15px;color:var(--mut);font-weight:400">healed + verified</span></div>
+        <div class="summary" style="margin-top:6px">${Object.entries(c).map(([k,v])=>chip(k)+' '+v).join(' ')}</div></div>`;
+    $('#dsTable tbody').innerHTML=P.outcomes.map(o=>`<tr><td><span class="sev sev-${o.severity}">${o.severity}</span></td><td class="mono">${o.rule}</td>
+      <td class="mono" title="${esc(o.resource)}">${esc((o.tf||o.resource).split('::').pop())}<div class="c-mut" style="font-size:11px">${esc((o.tf||'').split('::')[0])}</div></td>
+      <td class="mono">${o.tool||'-'}</td><td class="mono c-mut">${(o.api_calls||[]).filter(x=>!x.includes('Describe')).join('<br>')||'-'}</td><td>${chip(o.status)}</td><td class="num mono">${o.ms}</td></tr>`).join('');
+  }
+  $$('#dsTabs button').forEach(b=>b.onclick=()=>show(b.dataset.d));
+  show(names[0]);
+  $('#dsLinks').innerHTML=Object.entries(RESULTS.datasets).map(([n,d])=>`<p class="note" style="margin:0 0 6px"><b style="color:var(--fg)">${n}</b> - <a href="${d.repo}">${d.repo}</a> (${d.by})</p>`).join('');
+})();
+
+/* ======================================================= CHARTS */
+Chart.defaults.color='#5f6b7a'; Chart.defaults.font.family="Inter, system-ui, sans-serif"; Chart.defaults.borderColor='#eceef2';
+Chart.defaults.plugins.legend.labels.boxWidth=12;
+const COL={p:'#7d9be8',r:'#2e8b57',f:'#1f4fd1',a:'#9aa4b2',bad:'#c0392b',warn:'#c58a1b',cyan:'#3a8fa3'};
+const DS=Object.keys(RESULTS.datasets);
+function bar(id,labels,sets,opt={}){return new Chart($(id),{type:'bar',data:{labels,datasets:sets.map(s=>({borderRadius:4,maxBarThickness:28,...s}))},
+  options:{maintainAspectRatio:false,plugins:{title:{display:!!opt.title,text:opt.title,color:'#111827',font:{size:14,weight:600},align:'start'},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${opt.pct?pct(c.raw):c.raw}`}}},
+  indexAxis:opt.h?'y':'x',scales:{[opt.h?'x':'y']:{beginAtZero:true,max:opt.max,ticks:{callback:v=>opt.pct?Math.round(v*100)+'%':v}},[opt.h?'y':'x']:{grid:{display:false}}}}})}
+(function charts(){
+  const rawLabels=[], sets=[['precision',COL.p],['recall',COL.r],['f1',COL.f]];
+  const labels=[]; const dsets={precision:[],recall:[],f1:[]};
+  for(const d of DS){for(const k of ['raw','adjudicated']){labels.push(`${d} ${k==='raw'?'(raw)':'(adj.)'}`);const o=RESULTS.datasets[d]['accuracy_'+k].overall;for(const m in dsets)dsets[m].push(o[m])}}
+  bar('#c-acc',labels,sets.map(([m,c])=>({label:m,data:dsets[m],backgroundColor:c})),{title:'Precision, recall, F1 per dataset',pct:1,max:1});
+  const rules=[...new Set(DS.flatMap(d=>Object.keys(RESULTS.datasets[d].accuracy_raw.per_rule)))];
+  const pool=r=>{let t={tp:0,fp:0,fn:0,tn:0};for(const d of DS){const x=RESULTS.datasets[d].accuracy_raw.per_rule[r];if(x)for(const k in t)t[k]+=x[k]}const p=t.tp+t.fp?t.tp/(t.tp+t.fp):1,rc=t.tp+t.fn?t.tp/(t.tp+t.fn):1;return {f1:p+rc?2*p*rc/(p+rc):0,acc:(t.tp+t.tn)/(t.tp+t.tn+t.fp+t.fn),n:t.tp+t.tn+t.fp+t.fn}};
+  bar('#c-rule',rules.map(r=>r.replace('CLOUDTRAIL','CT').replace('_DISABLED','').replace('S3_NO_KMS_ENCRYPTION','S3_KMS')+` (n=${pool(r).n})`),[{label:'F1 (raw)',data:rules.map(r=>pool(r).f1),backgroundColor:COL.f},{label:'accuracy (raw)',data:rules.map(r=>pool(r).acc),backgroundColor:COL.a}],{title:'Per rule, pooled over datasets',pct:1,max:1,h:1});
+  // accuracy table
+  let h='<thead><tr><th>Dataset</th><th>Labels</th><th class="num">TP</th><th class="num">FP</th><th class="num">FN</th><th class="num">TN</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">Accuracy</th></tr></thead><tbody>';
+  const tot={raw:{tp:0,fp:0,fn:0,tn:0},adjudicated:{tp:0,fp:0,fn:0,tn:0}};
+  const rowf=(name,k,o)=>`<tr><td>${name}</td><td>${k}</td><td class="num">${o.tp}</td><td class="num">${o.fp}</td><td class="num">${o.fn}</td><td class="num">${o.tn}</td><td class="num">${o.precision.toFixed(3)}</td><td class="num">${o.recall.toFixed(3)}</td><td class="num"><b>${o.f1.toFixed(3)}</b></td><td class="num">${pct(o.accuracy)}</td></tr>`;
+  for(const d of DS)for(const k of ['raw','adjudicated']){const o=RESULTS.datasets[d]['accuracy_'+k].overall;for(const m in tot[k])tot[k][m]+=o[m];h+=rowf(d,k,o)}
+  for(const k of ['raw','adjudicated']){const t=tot[k],p=t.tp/(t.tp+t.fp),r=t.tp/(t.tp+t.fn);h+=rowf('<b>All three</b>',k,{...t,precision:p,recall:r,f1:2*p*r/(p+r),accuracy:(t.tp+t.tn)/(t.tp+t.tn+t.fp+t.fn)})}
+  $('#accTable').innerHTML=h+'</tbody>';
+  // E2
+  const st=['HEALED','ALREADY_RESOLVED','ESCALATED','NOT_HEALED','BLOCKED'], sc={HEALED:COL.r,ALREADY_RESOLVED:COL.cyan,ESCALATED:COL.warn,NOT_HEALED:COL.bad,BLOCKED:COL.a};
+  new Chart($('#c-heal'),{type:'bar',data:{labels:DS,datasets:st.map(s=>({label:s,data:DS.map(d=>{const r=RESULTS.e2[d].runs;return r.reduce((a,x)=>a+(x.status[s]||0),0)/r.length}),backgroundColor:sc[s],borderRadius:3,maxBarThickness:46}))},
+    options:{maintainAspectRatio:false,plugins:{title:{display:true,text:'Outcome of every finding (mean per run)',color:'#111827',font:{size:14,weight:600},align:'start'}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true}}}});
+  const stg=['detect','decide','fix','verify'];
+  bar('#c-time',DS,stg.map((s,i)=>({label:s+(s==='detect'?' (whole account)':' (per finding)'),data:DS.map(d=>RESULTS.e2[d].timings_ms[s]?.mean||0),backgroundColor:[COL.p,COL.a,COL.r,COL.cyan][i]})),{title:'Mean stage time (ms, log scale, emulated AWS)'});
+  Chart.getChart($('#c-time')).options.scales.y={type:'logarithmic',ticks:{callback:v=>[0.001,0.01,0.1,1,10,100,1000].includes(v)?v:''}}; Chart.getChart($('#c-time')).update();
+  // E3
+  const cfgs=[...new Set(RESULTS.e3.map(x=>x.config))], errs=[...new Set(RESULTS.e3.map(x=>x.error_rate))];
+  const cc=['#1f4fd1','#2e8b57','#c58a1b','#c0392b'];
+  const line=(id,key,title)=>new Chart($(id),{type:'line',data:{labels:errs.map(e=>Math.round(e*100)+'%'),datasets:cfgs.map((c,i)=>({label:c,data:errs.map(e=>RESULTS.e3.find(x=>x.config===c&&x.error_rate===e)[key]),borderColor:cc[i],backgroundColor:cc[i],tension:.25,pointRadius:4}))},
+    options:{maintainAspectRatio:false,plugins:{title:{display:true,text:title,color:'#111827',font:{size:14,weight:600},align:'start'},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${pct(c.raw)}`}}},scales:{y:{beginAtZero:true,max:key==='true_fix_rate'?1:undefined,ticks:{callback:v=>Math.round(v*100)+'%'}},x:{title:{display:true,text:'AI mistake rate'}}}}});
+  line('#c-e3a','true_fix_rate','Findings truly fixed (checked after the run)');
+  line('#c-e3b','wrong_tool_executed_rate','Wrong tool actually executed on a resource');
+  // E4
+  const sn=[...new Set(RESULTS.e4.map(x=>x.scenario))];
+  bar('#c-e4',sn,[{label:'false "healed" claims, no verification',data:sn.map(s=>RESULTS.e4.find(x=>x.scenario===s&&!x.verification).false_heal_claim_rate),backgroundColor:COL.bad},
+    {label:'false "healed" claims, with verification',data:sn.map(s=>RESULTS.e4.find(x=>x.scenario===s&&x.verification).false_heal_claim_rate),backgroundColor:COL.r},
+    {label:'truly fixed, with verification',data:sn.map(s=>RESULTS.e4.find(x=>x.scenario===s&&x.verification).true_fix_rate),backgroundColor:'#cfd6e4'}],{title:'Injected cloud faults',pct:1,max:1});
+  const e5=RESULTS.e5;
+  $('#e5').innerHTML=`<p style="margin:0 0 10px"><span style="font-size:34px;font-weight:600">${e5.blocked}/${e5.out_of_policy_calls}</span> <span class="c-mut">dangerous API calls (DeleteBucket, TerminateInstances, CreateAccessKey, StopLogging, AttachUserPolicy...) blocked before leaving the process.</span></p>
+   <p style="margin:0 0 10px"><span style="font-size:34px;font-weight:600">${e5.verifier_write_actions_denied}/${e5.verifier_write_actions_total}</span> <span class="c-mut">write actions denied to the verifier identity: it can read but never change what it judges.</span></p>
+   <div class="note">Remediator policy grants only ${e5.remediator_write_actions.length} actions:</div><div style="margin-top:8px">${e5.remediator_write_actions.map(a=>`<span class="pill mono">${a}</span>`).join('')}</div>`;
+  // adjudications
+  $('#adjTable tbody').innerHTML=DS.flatMap(d=>RESULTS.datasets[d].adjudications.map(a=>`<tr><td>${d}</td><td class="mono">${a.rule}</td><td class="mono">${esc(a.key.split('::').pop())}<div class="c-mut" style="font-size:11px">${esc(a.key.split('::')[0])}</div></td><td>${a.from}</td><td>${a.to===null?'<span class="c-mut">excluded</span>':a.to}</td><td style="font-size:12.5px;color:#c3cbd5">${esc(a.reason)}</td></tr>`)).join('')||'<tr><td colspan=6>none</td></tr>';
+  const nlab=DS.reduce((a,d)=>a+RESULTS.datasets[d].accuracy_raw.overall.n,0);
+  $('#resSub').innerHTML=`All numbers come from <span class="mono">experiments/run_all.py</span> (${RESULTS.runs} repeated runs per configuration) on ${DS.length} public datasets, ${nlab} labelled (resource, rule) pairs.`;
+  // tool table
+  $('#toolTable tbody').innerHTML=TOOLS.map(t=>`<tr><td class="mono"><b>${t.name}</b></td><td class="mono">${t.fixes}</td><td><span class="sev sev-${t.risk==='LOW'?'LOW':t.risk==='MEDIUM'?'MEDIUM':'CRITICAL'}">${t.risk}</span></td><td class="mono c-mut">${t.actions.join('<br>')}</td><td>${esc(t.description)}</td></tr>`).join('');
+})();
+
+/* ======================================================= architecture svg */
+(function arch(){
+  const box=(x,y,w,h,t,s,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="#ffffff" stroke="${c||'#d5d9e0'}"/><text x="${x+16}" y="${y+28}" fill="#111827" font-size="15" font-weight="600">${t}</text>${(s||[]).map((l,i)=>`<text x="${x+16}" y="${y+50+i*18}" fill="#5f6b7a" font-size="12.5">${l}</text>`).join('')}`;
+  const arr=(x1,y1,x2,y2,l)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#8b95a3" stroke-width="1.5" marker-end="url(#ah)"/>${l?`<text x="${(x1+x2)/2}" y="${(y1+y2)/2-7}" fill="#8b95a3" font-size="11" text-anchor="middle">${l}</text>`:''}`;
+  $('#arch').innerHTML=`<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#8b95a3"/></marker></defs>
+  ${box(20,30,230,120,'AWS account',['S3, EC2 security groups,','CloudTrail, IAM','(live, or moto emulator)'],'#1f4fd1')}
+  ${box(310,30,180,120,'01 Detect',['SelfHealReader','Get/List/Describe only','10 CIS-aligned rules'])}
+  ${box(540,30,200,120,'02 Decide',['AI agent or fixed rules','output must pass the','tool guardrail'])}
+  ${box(790,30,180,120,'03 Fix',['SelfHealRemediator','least-privilege policy','HIGH risk → human'])}
+  ${box(1010,30,150,120,'04 Verify',['separate reader','re-check + backoff','retry once'])}
+  ${arr(250,90,308,90)}${arr(490,90,538,90,'finding')}${arr(740,90,788,90,'tool')}${arr(970,90,1008,90)}
+  <path d="M1085 150 C1085 250, 135 250, 135 152" fill="none" stroke="#2e8b57" stroke-dasharray="5 5" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="610" y="244" fill="#2e8b57" font-size="12" text-anchor="middle">HEALED / NOT HEALED written to the audit log; next scan catches drift</text>
+  ${box(540,262,200,58,'Approved tool registry',[])}<text x="556" y="308" fill="#5f6b7a" font-size="12">10 tools, IAM actions, risk tier</text>
+  <line x1="640" y1="262" x2="640" y2="152" stroke="#9aa4b2" stroke-dasharray="3 4"/><line x1="740" y1="290" x2="880" y2="152" stroke="#9aa4b2" stroke-dasharray="3 4"/>`;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2059 @@
+{
+ "terragoat": {
+  "detect_ms": 310.8,
+  "outcomes": [
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--flowbucket-c83318",
+    "tf": "/ec2.tf::aws_s3_bucket.flowbucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 60.73,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--data-1b6ac4",
+    "tf": "/s3.tf::aws_s3_bucket.data",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.73,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--financials-231471",
+    "tf": "/s3.tf::aws_s3_bucket.financials",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.61,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--operations-5cf7de",
+    "tf": "/s3.tf::aws_s3_bucket.operations",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.91,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--data-science-cc80c4",
+    "tf": "/s3.tf::aws_s3_bucket.data_science",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.36,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "terrag--logs-f2667d",
+    "tf": "/s3.tf::aws_s3_bucket.logs",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.59,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-2ec5ff825a914e11e",
+    "tf": "/ec2.tf::aws_security_group.web-node",
+    "tool": "fix_open_ssh",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 90.1,
+    "evidence": {
+     "group_name": "terrag--web-node-4ef388",
+     "open_rules": [
+      {
+       "protocol": "tcp",
+       "from": 22,
+       "to": 22,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_MISSING",
+    "severity": "HIGH",
+    "resource": "account",
+    "tf": null,
+    "tool": "enable_cloudtrail",
+    "status": "HEALED",
+    "detail": "created multi-region trail selfheal-org-trail and started logging",
+    "api_calls": [
+     "sts:GetCallerIdentity",
+     "s3:ListBucket",
+     "s3:CreateBucket",
+     "s3:PutBucketPublicAccessBlock",
+     "s3:PutBucketVersioning",
+     "s3:PutEncryptionConfiguration",
+     "cloudtrail:CreateTrail",
+     "cloudtrail:StartLogging"
+    ],
+    "attempts": 1,
+    "ms": 41.08,
+    "evidence": {
+     "trails": 0
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "terrag--flowbucket-c83318",
+    "tf": "/ec2.tf::aws_s3_bucket.flowbucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.65,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "terrag--data-1b6ac4",
+    "tf": "/s3.tf::aws_s3_bucket.data",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.63,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "terrag--financials-231471",
+    "tf": "/s3.tf::aws_s3_bucket.financials",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.75,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "terrag--operations-5cf7de",
+    "tf": "/s3.tf::aws_s3_bucket.operations",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.82,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "terrag--data-science-cc80c4",
+    "tf": "/s3.tf::aws_s3_bucket.data_science",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.59,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "terrag--flowbucket-c83318",
+    "tf": "/ec2.tf::aws_s3_bucket.flowbucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.58,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "terrag--data-1b6ac4",
+    "tf": "/s3.tf::aws_s3_bucket.data",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.88,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "terrag--financials-231471",
+    "tf": "/s3.tf::aws_s3_bucket.financials",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.46,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   }
+  ],
+  "left_after": []
+ },
+ "sadcloud": {
+  "detect_ms": 973.0,
+  "outcomes": [
+   {
+    "rule": "SG_OPEN_ALL_PORTS",
+    "severity": "CRITICAL",
+    "resource": "sg-5ed1f376011dd20f6",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all",
+    "tool": "fix_open_all_ingress",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 124.99,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-all-9444c8",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_ALL_PORTS",
+    "severity": "CRITICAL",
+    "resource": "sg-a56dacf6b761f6ea7",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+    "tool": "fix_open_all_ingress",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 6.15,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-self-e9fc83",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "IAM_ADMIN_WILDCARD",
+    "severity": "CRITICAL",
+    "resource": "arn:aws:iam::123456789012:policy/sadclo-admin-not-indicated-policy-8793f3",
+    "tf": "/modules/aws/iam/main.tf::aws_iam_policy.admin_not_indicated_policy",
+    "tool": "quarantine_admin_policy",
+    "status": "ESCALATED",
+    "detail": "HIGH risk tool: waiting for human approval",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "policy_name": "sadclo-admin-not-indicated-policy-8793f3",
+     "version": "v1"
+    }
+   },
+   {
+    "rule": "IAM_ADMIN_WILDCARD",
+    "severity": "CRITICAL",
+    "resource": "arn:aws:iam::123456789012:policy/sadclo-policy-6a21ec",
+    "tf": "/modules/aws/iam/main.tf::aws_iam_policy.policy",
+    "tool": "quarantine_admin_policy",
+    "status": "ESCALATED",
+    "detail": "HIGH risk tool: waiting for human approval",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "policy_name": "sadclo-policy-6a21ec",
+     "version": "v1"
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo-dules-aws-cloudtrail-logging-cf85ff",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_s3_bucket.logging",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 28.68,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo--modules-aws-elbv2-access-logging-863fd0",
+    "tf": "/modules/aws/elbv2/main.tf::aws_s3_bucket.access_logging",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.73,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo--modules-aws-s3-main-f000bb",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.main",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.32,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo--modules-aws-s3-logging-ddcc6c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.logging",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.04,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo--modules-aws-s3-getonly-0f607c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.getonly",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.92,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "sadclo--modules-aws-s3-public-9da92c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.public",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.09,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-5ed1f376011dd20f6",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all",
+    "tool": null,
+    "status": "ALREADY_RESOLVED",
+    "detail": "cleared by an earlier fix in this run",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-all-9444c8",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_RDP",
+    "severity": "HIGH",
+    "resource": "sg-5ed1f376011dd20f6",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all",
+    "tool": null,
+    "status": "ALREADY_RESOLVED",
+    "detail": "cleared by an earlier fix in this run",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-all-9444c8",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-a56dacf6b761f6ea7",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+    "tool": null,
+    "status": "ALREADY_RESOLVED",
+    "detail": "cleared by an earlier fix in this run",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-self-e9fc83",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_RDP",
+    "severity": "HIGH",
+    "resource": "sg-a56dacf6b761f6ea7",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+    "tool": null,
+    "status": "ALREADY_RESOLVED",
+    "detail": "cleared by an earlier fix in this run",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-all-ports-to-self-e9fc83",
+     "open_rules": [
+      {
+       "protocol": "-1",
+       "from": null,
+       "to": null,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-bc994bf21f9d15576",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.known_port_to_all",
+    "tool": "fix_open_ssh",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 12.92,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-known-port-to-all-d0d686",
+     "open_rules": [
+      {
+       "protocol": "tcp",
+       "from": 22,
+       "to": 22,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_RDP",
+    "severity": "HIGH",
+    "resource": "sg-bc994bf21f9d15576",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.known_port_to_all",
+    "tool": "fix_open_rdp",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 12.28,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-known-port-to-all-d0d686",
+     "open_rules": [
+      {
+       "protocol": "tcp",
+       "from": 3389,
+       "to": 3389,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-71f017a9b99c84c91",
+    "tf": "/modules/aws/ec2/main.tf::aws_security_group.opens_port_range",
+    "tool": "fix_open_ssh",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 9.26,
+    "evidence": {
+     "group_name": "sadclo--modules-aws-ec2-opens-port-range-77d48b",
+     "open_rules": [
+      {
+       "protocol": "tcp",
+       "from": 21,
+       "to": 25,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo-dules-aws-cloudtrail-logging-cf85ff",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_s3_bucket.logging",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 13.48,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo--modules-aws-elbv2-access-logging-863fd0",
+    "tf": "/modules/aws/elbv2/main.tf::aws_s3_bucket.access_logging",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 12.61,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo--modules-aws-s3-main-f000bb",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.main",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 12.12,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo--modules-aws-s3-logging-ddcc6c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.logging",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 12.64,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo--modules-aws-s3-getonly-0f607c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.getonly",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 12.24,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "sadclo--modules-aws-s3-public-9da92c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.public",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 11.86,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NOT_MULTI_REGION",
+    "severity": "MEDIUM",
+    "resource": "sadclo-dules-aws-cloudtrail-main-aa0e67",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_cloudtrail.main",
+    "tool": "set_cloudtrail_multiregion",
+    "status": "HEALED",
+    "detail": "trail set to multi-region",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 16.89,
+    "evidence": {
+     "is_multi_region": false
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NOT_MULTI_REGION",
+    "severity": "MEDIUM",
+    "resource": "sadclo-dules-aws-cloudtrail-duplicate-d74ce1",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_cloudtrail.duplicate",
+    "tool": "set_cloudtrail_multiregion",
+    "status": "HEALED",
+    "detail": "trail set to multi-region",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 5.6,
+    "evidence": {
+     "is_multi_region": false
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NO_LOG_VALIDATION",
+    "severity": "MEDIUM",
+    "resource": "sadclo-dules-aws-cloudtrail-duplicate-d74ce1",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_cloudtrail.duplicate",
+    "tool": "enable_cloudtrail_log_validation",
+    "status": "HEALED",
+    "detail": "log file validation enabled",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 5.7,
+    "evidence": {
+     "log_file_validation": false
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "sadclo-dules-aws-cloudtrail-logging-cf85ff",
+    "tf": "/modules/aws/cloudtrail/main.tf::aws_s3_bucket.logging",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 13.3,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "sadclo--modules-aws-elbv2-access-logging-863fd0",
+    "tf": "/modules/aws/elbv2/main.tf::aws_s3_bucket.access_logging",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 12.55,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "sadclo--modules-aws-s3-logging-ddcc6c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.logging",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 12.55,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "sadclo--modules-aws-s3-getonly-0f607c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.getonly",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 12.3,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "sadclo--modules-aws-s3-public-9da92c",
+    "tf": "/modules/aws/s3/main.tf::aws_s3_bucket.public",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 12.14,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   }
+  ],
+  "left_after": [
+   "IAM_ADMIN_WILDCARD:arn:aws:iam::123456789012:policy/sadclo-admin-not-indicated-policy-8793f3",
+   "IAM_ADMIN_WILDCARD:arn:aws:iam::123456789012:policy/sadclo-policy-6a21ec"
+  ]
+ },
+ "cloudgoat": {
+  "detect_ms": 591.7,
+  "outcomes": [
+   {
+    "rule": "IAM_ADMIN_WILDCARD",
+    "severity": "CRITICAL",
+    "resource": "arn:aws:iam::123456789012:policy/cloudg-admin-user-policy-d87441",
+    "tf": "/beanstalk_secrets/terraform/iam.tf::aws_iam_policy.admin_user_policy",
+    "tool": "quarantine_admin_policy",
+    "status": "ESCALATED",
+    "detail": "HIGH risk tool: waiting for human approval",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "policy_name": "cloudg-admin-user-policy-d87441",
+     "version": "v1"
+    }
+   },
+   {
+    "rule": "IAM_ADMIN_WILDCARD",
+    "severity": "CRITICAL",
+    "resource": "arn:aws:iam::123456789012:policy/cloudg-ec2-mighty-policy-5e7448",
+    "tf": "/iam_privesc_by_attachment/terraform/iam_mighty.tf::aws_iam_policy.ec2_mighty_policy",
+    "tool": "quarantine_admin_policy",
+    "status": "ESCALATED",
+    "detail": "HIGH risk tool: waiting for human approval",
+    "api_calls": [],
+    "attempts": 0,
+    "ms": 0.0,
+    "evidence": {
+     "policy_name": "cloudg-ec2-mighty-policy-5e7448",
+     "version": "v1"
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--confusion-terraform-kb-s3-bucket-0f517e",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_s3_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 60.89,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--confusion-terraform-kb-code-interpreter-bucket-23f7ee",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_code_interpreter_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.17,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--hijacking-terraform-target-s3-bucket-e9e868",
+    "tf": "/bedrock_agent_hijacking/terraform/s3.tf::aws_s3_bucket.target_s3_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.87,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--breach-s3-terraform-cg-cardholder-data-bucket-f62ab2",
+    "tf": "/cloud_breach_s3/terraform/s3.tf::aws_s3_bucket.cg-cardholder-data-bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.98,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-on-evasion-terraform-cloudtrail-logs-49ac07",
+    "tf": "/detection_evasion/terraform/cloudtrail.tf::aws_s3_bucket.cloudtrail_logs",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 28.97,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--ec2-ssrf-terraform-secret-bucket-681d92",
+    "tf": "/ec2_ssrf/terraform/s3.tf::aws_s3_bucket.secret_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.87,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-protection-terraform-secret-s3-bucket-2a0cd0",
+    "tf": "/ecs_privesc_evade_protection/terraform/s3.tf::aws_s3_bucket.secret-s3-bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.99,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ue-privesc-terraform-data-c520a5",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.data",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.94,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ue-privesc-terraform-web-71fcc8",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.web",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.79,
+    "evidence": {
+     "public_access_block": {
+      "BlockPublicAcls": true,
+      "IgnorePublicAcls": true,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": true
+     },
+     "acl_public": false,
+     "policy_public": true
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ce-web-app-terraform-logs-7257c1",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.logs",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 13.75,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ce-web-app-terraform-secret-426796",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.secret",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.71,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ce-web-app-terraform-keystore-a81d23",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.keystore",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.84,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-s-snapshot-terraform-cg-data-s3-bucket-4dc671",
+    "tf": "/rds_snapshot/terraform/s3.tf::aws_s3_bucket.cg-data-s3-bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 10.71,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ck-via-cfn-terraform-flag-bucket-cbf754",
+    "tf": "/s3_version_rollback_via_cfn/terraform/s3.tf::aws_s3_bucket.flag_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 11.33,
+    "evidence": {
+     "public_access_block": {
+      "BlockPublicAcls": false,
+      "IgnorePublicAcls": false,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": false
+     },
+     "acl_public": false,
+     "policy_public": true
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-ck-via-cfn-terraform-index-bucket-27627b",
+    "tf": "/s3_version_rollback_via_cfn/terraform/s3.tf::aws_s3_bucket.index_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.38,
+    "evidence": {
+     "public_access_block": {
+      "BlockPublicAcls": false,
+      "IgnorePublicAcls": false,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": false
+     },
+     "acl_public": false,
+     "policy_public": true
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--the-cloud-terraform-secrets-bucket-a7d1ac",
+    "tf": "/secrets_in_the_cloud/terraform/s3_bucket.tf::aws_s3_bucket.secrets_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 8.96,
+    "evidence": {
+     "public_access_block": null,
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg--static-terraform-assets-bucket-cc4fe2",
+    "tf": "/static/terraform/s3.tf::aws_s3_bucket.assets_bucket",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.06,
+    "evidence": {
+     "public_access_block": {
+      "BlockPublicAcls": false,
+      "IgnorePublicAcls": false,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": false
+     },
+     "acl_public": false,
+     "policy_public": false
+    }
+   },
+   {
+    "rule": "S3_PUBLIC_ACCESS",
+    "severity": "HIGH",
+    "resource": "cloudg-le-cognito-terraform-cognito-s3-04daa0",
+    "tf": "/vulnerable_cognito/terraform/s3.tf::aws_s3_bucket.cognito_s3",
+    "tool": "fix_s3_public_access",
+    "status": "HEALED",
+    "detail": "public access block enabled (all 4 settings)",
+    "api_calls": [
+     "s3:PutBucketPublicAccessBlock"
+    ],
+    "attempts": 1,
+    "ms": 9.21,
+    "evidence": {
+     "public_access_block": {
+      "BlockPublicAcls": false,
+      "IgnorePublicAcls": true,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": true
+     },
+     "acl_public": false,
+     "policy_public": true
+    }
+   },
+   {
+    "rule": "SG_OPEN_SSH",
+    "severity": "HIGH",
+    "resource": "sg-c418a1b0af16089eb",
+    "tf": "/iam_privesc_by_attachment/terraform/ec2.tf::aws_security_group.ec2_server",
+    "tool": "fix_open_ssh",
+    "status": "HEALED",
+    "detail": "revoked 1 internet-facing ingress rule(s)",
+    "api_calls": [
+     "ec2:DescribeSecurityGroups",
+     "ec2:RevokeSecurityGroupIngress"
+    ],
+    "attempts": 1,
+    "ms": 67.93,
+    "evidence": {
+     "group_name": "cloudg-attachment-terraform-ec2-server-5650a1",
+     "open_rules": [
+      {
+       "protocol": "tcp",
+       "from": 22,
+       "to": 22,
+       "cidrs": [
+        "0.0.0.0/0"
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--confusion-terraform-kb-s3-bucket-0f517e",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_s3_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 13.98,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--confusion-terraform-kb-code-interpreter-bucket-23f7ee",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_code_interpreter_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.01,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--hijacking-terraform-target-s3-bucket-e9e868",
+    "tf": "/bedrock_agent_hijacking/terraform/s3.tf::aws_s3_bucket.target_s3_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 10.67,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--breach-s3-terraform-cg-cardholder-data-bucket-f62ab2",
+    "tf": "/cloud_breach_s3/terraform/s3.tf::aws_s3_bucket.cg-cardholder-data-bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.73,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-on-evasion-terraform-cloudtrail-logs-49ac07",
+    "tf": "/detection_evasion/terraform/cloudtrail.tf::aws_s3_bucket.cloudtrail_logs",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.49,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--ec2-ssrf-terraform-secret-bucket-681d92",
+    "tf": "/ec2_ssrf/terraform/s3.tf::aws_s3_bucket.secret_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.33,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-protection-terraform-secret-s3-bucket-2a0cd0",
+    "tf": "/ecs_privesc_evade_protection/terraform/s3.tf::aws_s3_bucket.secret-s3-bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.87,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-protection-terraform-cloudtrail-bucket-d55605",
+    "tf": "/ecs_privesc_evade_protection/terraform/s3.tf::aws_s3_bucket.cloudtrail_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.21,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ue-privesc-terraform-data-c520a5",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.data",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.89,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ue-privesc-terraform-web-71fcc8",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.web",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.53,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ce-web-app-terraform-logs-7257c1",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.logs",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.4,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ce-web-app-terraform-secret-426796",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.secret",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.35,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ce-web-app-terraform-keystore-a81d23",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.keystore",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.06,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-s-snapshot-terraform-cg-data-s3-bucket-4dc671",
+    "tf": "/rds_snapshot/terraform/s3.tf::aws_s3_bucket.cg-data-s3-bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.37,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ck-via-cfn-terraform-flag-bucket-cbf754",
+    "tf": "/s3_version_rollback_via_cfn/terraform/s3.tf::aws_s3_bucket.flag_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.3,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-ck-via-cfn-terraform-index-bucket-27627b",
+    "tf": "/s3_version_rollback_via_cfn/terraform/s3.tf::aws_s3_bucket.index_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.94,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--the-cloud-terraform-secrets-bucket-a7d1ac",
+    "tf": "/secrets_in_the_cloud/terraform/s3_bucket.tf::aws_s3_bucket.secrets_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.03,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg--static-terraform-assets-bucket-cc4fe2",
+    "tf": "/static/terraform/s3.tf::aws_s3_bucket.assets_bucket",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 9.07,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "S3_NO_KMS_ENCRYPTION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-le-cognito-terraform-cognito-s3-04daa0",
+    "tf": "/vulnerable_cognito/terraform/s3.tf::aws_s3_bucket.cognito_s3",
+    "tool": "enable_s3_kms_encryption",
+    "status": "HEALED",
+    "detail": "default SSE-KMS encryption enabled (aws/s3 key)",
+    "api_calls": [
+     "s3:PutEncryptionConfiguration"
+    ],
+    "attempts": 1,
+    "ms": 8.02,
+    "evidence": {
+     "sse_algorithm": "none"
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NO_LOG_VALIDATION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-on-evasion-terraform-cloudgoat-trail-cc0dd9",
+    "tf": "/detection_evasion/terraform/cloudtrail.tf::aws_cloudtrail.cloudgoat_trail",
+    "tool": "enable_cloudtrail_log_validation",
+    "status": "HEALED",
+    "detail": "log file validation enabled",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 12.31,
+    "evidence": {
+     "log_file_validation": false
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NOT_MULTI_REGION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-protection-terraform-cloudtrail-588032",
+    "tf": "/ecs_privesc_evade_protection/terraform/cloudtrail.tf::aws_cloudtrail.cloudtrail",
+    "tool": "set_cloudtrail_multiregion",
+    "status": "HEALED",
+    "detail": "trail set to multi-region",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 4.09,
+    "evidence": {
+     "is_multi_region": false
+    }
+   },
+   {
+    "rule": "CLOUDTRAIL_NO_LOG_VALIDATION",
+    "severity": "MEDIUM",
+    "resource": "cloudg-protection-terraform-cloudtrail-588032",
+    "tf": "/ecs_privesc_evade_protection/terraform/cloudtrail.tf::aws_cloudtrail.cloudtrail",
+    "tool": "enable_cloudtrail_log_validation",
+    "status": "HEALED",
+    "detail": "log file validation enabled",
+    "api_calls": [
+     "cloudtrail:UpdateTrail"
+    ],
+    "attempts": 1,
+    "ms": 4.06,
+    "evidence": {
+     "log_file_validation": false
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--confusion-terraform-kb-s3-bucket-0f517e",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_s3_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 9.64,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--confusion-terraform-kb-code-interpreter-bucket-23f7ee",
+    "tf": "/agentcore_identity_confusion/terraform/s3.tf::aws_s3_bucket.kb_code_interpreter_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.72,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--hijacking-terraform-target-s3-bucket-e9e868",
+    "tf": "/bedrock_agent_hijacking/terraform/s3.tf::aws_s3_bucket.target_s3_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.92,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--breach-s3-terraform-cg-cardholder-data-bucket-f62ab2",
+    "tf": "/cloud_breach_s3/terraform/s3.tf::aws_s3_bucket.cg-cardholder-data-bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.57,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-on-evasion-terraform-cloudtrail-logs-49ac07",
+    "tf": "/detection_evasion/terraform/cloudtrail.tf::aws_s3_bucket.cloudtrail_logs",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.46,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--ec2-ssrf-terraform-secret-bucket-681d92",
+    "tf": "/ec2_ssrf/terraform/s3.tf::aws_s3_bucket.secret_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 9.43,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-protection-terraform-secret-s3-bucket-2a0cd0",
+    "tf": "/ecs_privesc_evade_protection/terraform/s3.tf::aws_s3_bucket.secret-s3-bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 9.75,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-protection-terraform-cloudtrail-bucket-d55605",
+    "tf": "/ecs_privesc_evade_protection/terraform/s3.tf::aws_s3_bucket.cloudtrail_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 9.93,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ue-privesc-terraform-data-c520a5",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.data",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.47,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ue-privesc-terraform-web-71fcc8",
+    "tf": "/glue_privesc/terraform/s3.tf::aws_s3_bucket.web",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.1,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ce-web-app-terraform-logs-7257c1",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.logs",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 7.99,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ce-web-app-terraform-secret-426796",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.secret",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 11.13,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ce-web-app-terraform-keystore-a81d23",
+    "tf": "/rce_web_app/terraform/s3.tf::aws_s3_bucket.keystore",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 12.05,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-s-snapshot-terraform-cg-data-s3-bucket-4dc671",
+    "tf": "/rds_snapshot/terraform/s3.tf::aws_s3_bucket.cg-data-s3-bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.53,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-ck-via-cfn-terraform-flag-bucket-cbf754",
+    "tf": "/s3_version_rollback_via_cfn/terraform/s3.tf::aws_s3_bucket.flag_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.26,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--the-cloud-terraform-secrets-bucket-a7d1ac",
+    "tf": "/secrets_in_the_cloud/terraform/s3_bucket.tf::aws_s3_bucket.secrets_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.62,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg--static-terraform-assets-bucket-cc4fe2",
+    "tf": "/static/terraform/s3.tf::aws_s3_bucket.assets_bucket",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 9.36,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   },
+   {
+    "rule": "S3_VERSIONING_DISABLED",
+    "severity": "LOW",
+    "resource": "cloudg-le-cognito-terraform-cognito-s3-04daa0",
+    "tf": "/vulnerable_cognito/terraform/s3.tf::aws_s3_bucket.cognito_s3",
+    "tool": "enable_s3_versioning",
+    "status": "HEALED",
+    "detail": "versioning enabled",
+    "api_calls": [
+     "s3:PutBucketVersioning"
+    ],
+    "attempts": 1,
+    "ms": 8.87,
+    "evidence": {
+     "versioning": "Never enabled"
+    }
+   }
+  ],
+  "left_after": [
+   "IAM_ADMIN_WILDCARD:arn:aws:iam::123456789012:policy/cloudg-admin-user-policy-d87441",
+   "IAM_ADMIN_WILDCARD:arn:aws:iam::123456789012:policy/cloudg-ec2-mighty-policy-5e7448"
+  ]
+ }
+}

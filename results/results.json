@@ -1,0 +1,2359 @@
+{
+  "generated": "2026-11-19 17:28:57",
+  "runs": 5,
+  "datasets": {
+    "terragoat": {
+      "repo": "https://github.com/bridgecrewio/terragoat",
+      "path": "terraform/aws",
+      "by": "Bridgecrew (Palo Alto Networks)",
+      "commit": "729f8da",
+      "modules": 1,
+      "tf_files_with_resources": 12,
+      "resources_total": 64,
+      "resources_deployed": 10,
+      "skipped": 0,
+      "deploy_s": 1.39,
+      "labels_raw": {
+        "S3_PUBLIC_ACCESS": {
+          "pos": 6,
+          "neg": 0
+        },
+        "S3_VERSIONING_DISABLED": {
+          "pos": 3,
+          "neg": 3
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "pos": 5,
+          "neg": 1
+        },
+        "SG_OPEN_SSH": {
+          "pos": 1,
+          "neg": 1
+        },
+        "SG_OPEN_RDP": {
+          "pos": 0,
+          "neg": 2
+        },
+        "SG_OPEN_ALL_PORTS": {
+          "pos": 0,
+          "neg": 2
+        },
+        "IAM_ADMIN_WILDCARD": {
+          "pos": 0,
+          "neg": 2
+        }
+      },
+      "accuracy_raw": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "tn": 3,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_RDP": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "tn": 11,
+          "n": 26,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "accuracy": 1.0
+        }
+      },
+      "accuracy_adjudicated": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "tn": 3,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_RDP": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 2,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "tn": 11,
+          "n": 26,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "accuracy": 1.0
+        }
+      },
+      "adjudications": [],
+      "mismatches_raw": [],
+      "beyond_checkov": {},
+      "findings_total": 16
+    },
+    "sadcloud": {
+      "repo": "https://github.com/nccgroup/sadcloud",
+      "path": "",
+      "by": "NCC Group",
+      "commit": "f538652",
+      "modules": 23,
+      "tf_files_with_resources": 23,
+      "resources_total": 90,
+      "resources_deployed": 27,
+      "skipped": 0,
+      "deploy_s": 0.4,
+      "labels_raw": {
+        "S3_PUBLIC_ACCESS": {
+          "pos": 6,
+          "neg": 0
+        },
+        "S3_VERSIONING_DISABLED": {
+          "pos": 6,
+          "neg": 0
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "pos": 6,
+          "neg": 0
+        },
+        "SG_OPEN_SSH": {
+          "pos": 4,
+          "neg": 10
+        },
+        "SG_OPEN_RDP": {
+          "pos": 3,
+          "neg": 11
+        },
+        "SG_OPEN_ALL_PORTS": {
+          "pos": 0,
+          "neg": 14
+        },
+        "CLOUDTRAIL_NOT_MULTI_REGION": {
+          "pos": 1,
+          "neg": 0
+        },
+        "CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "pos": 1,
+          "neg": 0
+        },
+        "IAM_ADMIN_WILDCARD": {
+          "pos": 2,
+          "neg": 4
+        }
+      },
+      "accuracy_raw": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 1,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 0.8333,
+            "f1": 0.9091,
+            "accuracy": 0.8333
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 3,
+            "fp": 1,
+            "fn": 1,
+            "tn": 9,
+            "n": 14,
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75,
+            "accuracy": 0.8571
+          },
+          "SG_OPEN_RDP": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 1,
+            "tn": 10,
+            "n": 14,
+            "precision": 0.6667,
+            "recall": 0.6667,
+            "f1": 0.6667,
+            "accuracy": 0.8571
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 0,
+            "tn": 12,
+            "n": 14,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0,
+            "accuracy": 0.8571
+          },
+          "CLOUDTRAIL_NOT_MULTI_REGION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 1,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NO_LOG_VALIDATION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 1,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 26,
+          "fp": 4,
+          "fn": 3,
+          "tn": 35,
+          "n": 68,
+          "precision": 0.8667,
+          "recall": 0.8966,
+          "f1": 0.8814,
+          "accuracy": 0.8971
+        }
+      },
+      "accuracy_adjudicated": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "tn": 10,
+            "n": 14,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_RDP": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "tn": 11,
+            "n": 14,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 12,
+            "n": 14,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NOT_MULTI_REGION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 1,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NO_LOG_VALIDATION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 1,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "n": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 30,
+          "fp": 0,
+          "fn": 0,
+          "tn": 38,
+          "n": 68,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "accuracy": 1.0
+        }
+      },
+      "adjudications": [
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all",
+          "from": 1,
+          "to": 0,
+          "reason": "Ingress is protocol=icmp only. ICMP has no TCP port 22, so SSH is not reachable. Checkov false positive."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all",
+          "from": 1,
+          "to": 0,
+          "reason": "Ingress is protocol=icmp only, so TCP 3389 is not reachable. Checkov false positive."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "from": 0,
+          "to": 1,
+          "reason": "protocol=-1 from 0.0.0.0/0 allows every protocol and port including TCP 22 (the extra self=true does not narrow it). Checkov false negative."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "from": 0,
+          "to": 1,
+          "reason": "protocol=-1 from 0.0.0.0/0 includes TCP 3389. Checkov false negative."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "from": 0,
+          "to": 1,
+          "reason": "protocol=-1 from 0.0.0.0/0 is all traffic. Checkov CKV_AWS_277 only matches port -1, missing from_port=0/to_port=0 with protocol -1."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all",
+          "from": 0,
+          "to": 1,
+          "reason": "Same as above: protocol=-1 from 0.0.0.0/0. Checkov even flags this group for SSH (CKV_AWS_24) but not for all ports, which is inconsistent."
+        },
+        {
+          "rule": "S3_VERSIONING_DISABLED",
+          "key": "/modules/aws/s3/main.tf::aws_s3_bucket.main",
+          "from": 1,
+          "to": 0,
+          "reason": "versioning.enabled = var.no_versioning ? false : true and no_versioning defaults to false, so versioning is ON. Checkov did not resolve the conditional."
+        }
+      ],
+      "mismatches_raw": [
+        {
+          "rule": "S3_VERSIONING_DISABLED",
+          "key": "/modules/aws/s3/main.tf::aws_s3_bucket.main",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "checkov": 0,
+          "detector": 1
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "checkov": 0,
+          "detector": 1
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.icmp_to_all",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_all",
+          "checkov": 0,
+          "detector": 1
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/modules/aws/ec2/main.tf::aws_security_group.all_ports_to_self",
+          "checkov": 0,
+          "detector": 1
+        }
+      ],
+      "beyond_checkov": {},
+      "findings_total": 31
+    },
+    "cloudgoat": {
+      "repo": "https://github.com/RhinoSecurityLabs/cloudgoat",
+      "path": "cloudgoat/scenarios/aws",
+      "by": "Rhino Security Labs",
+      "commit": "8b0895b",
+      "modules": 31,
+      "tf_files_with_resources": 137,
+      "resources_total": 767,
+      "resources_deployed": 113,
+      "skipped": 23,
+      "deploy_s": 1.46,
+      "labels_raw": {
+        "S3_PUBLIC_ACCESS": {
+          "pos": 18,
+          "neg": 1
+        },
+        "S3_VERSIONING_DISABLED": {
+          "pos": 18,
+          "neg": 1
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "pos": 19,
+          "neg": 0
+        },
+        "SG_OPEN_SSH": {
+          "pos": 13,
+          "neg": 24
+        },
+        "SG_OPEN_RDP": {
+          "pos": 1,
+          "neg": 36
+        },
+        "SG_OPEN_ALL_PORTS": {
+          "pos": 1,
+          "neg": 36
+        },
+        "CLOUDTRAIL_NOT_MULTI_REGION": {
+          "pos": 1,
+          "neg": 1
+        },
+        "CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "pos": 2,
+          "neg": 0
+        },
+        "IAM_ADMIN_WILDCARD": {
+          "pos": 2,
+          "neg": 77
+        }
+      },
+      "accuracy_raw": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 19,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 12,
+            "tn": 24,
+            "n": 37,
+            "precision": 1.0,
+            "recall": 0.0769,
+            "f1": 0.1429,
+            "accuracy": 0.6757
+          },
+          "SG_OPEN_RDP": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 36,
+            "n": 37,
+            "precision": 1.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "accuracy": 0.973
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "tn": 36,
+            "n": 37,
+            "precision": 1.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "accuracy": 0.973
+          },
+          "CLOUDTRAIL_NOT_MULTI_REGION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NO_LOG_VALIDATION": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 77,
+            "n": 79,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 61,
+          "fp": 0,
+          "fn": 14,
+          "tn": 176,
+          "n": 251,
+          "precision": 1.0,
+          "recall": 0.8133,
+          "f1": 0.8971,
+          "accuracy": 0.9442
+        }
+      },
+      "accuracy_adjudicated": {
+        "per_rule": {
+          "S3_PUBLIC_ACCESS": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_VERSIONING_DISABLED": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "S3_NO_KMS_ENCRYPTION": {
+            "tp": 19,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 19,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_SSH": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 13,
+            "n": 13,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_RDP": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 13,
+            "n": 13,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "SG_OPEN_ALL_PORTS": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 13,
+            "n": 13,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NOT_MULTI_REGION": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "CLOUDTRAIL_NO_LOG_VALIDATION": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "n": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          },
+          "IAM_ADMIN_WILDCARD": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 77,
+            "n": 79,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "accuracy": 1.0
+          }
+        },
+        "overall": {
+          "tp": 60,
+          "fp": 0,
+          "fn": 0,
+          "tn": 119,
+          "n": 179,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "accuracy": 1.0
+        }
+      },
+      "adjudications": [
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/codebuild_secrets/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/codebuild_secrets/terraform/rds.tf::aws_security_group.cg-rds-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ecs_efs_attack/terraform/ecs.tf::aws_security_group.cg-ecs-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ecs_privesc_evade_protection/terraform/vpc.tf::aws_security_group.allow_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ecs_takeover/terraform/vpc.tf::aws_security_group.ecs_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rce_web_app/terraform/lb.tf::aws_security_group.lb_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.allow_mysql",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/data_secrets/terraform/ec2.tf::aws_security_group.sg",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ec2_ssrf/terraform/ec2.tf::aws_security_group.ec2_security_group",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ecs_efs_attack/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/iam_privesc_by_attachment/terraform/ec2.tf::aws_security_group.ec2_server",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rce_web_app/terraform/ec2.tf::aws_security_group.ec2_ssh",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/scenario_template/terraform/ec2.tf::aws_security_group.sg",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/secrets_in_the_cloud/terraform/ec2_instance.tf::aws_security_group.web_app_sg",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/static/terraform/ec2.tf::aws_security_group.sg",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/vpc_peering_overexposed/terraform/vpc.tf::aws_security_group.dev_sg",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/codebuild_secrets/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/codebuild_secrets/terraform/rds.tf::aws_security_group.cg-rds-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/data_secrets/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/ec2_ssrf/terraform/ec2.tf::aws_security_group.ec2_security_group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/ecs_efs_attack/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/ecs_efs_attack/terraform/ecs.tf::aws_security_group.cg-ecs-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/ecs_privesc_evade_protection/terraform/vpc.tf::aws_security_group.allow_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/ecs_takeover/terraform/vpc.tf::aws_security_group.ecs_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/iam_privesc_by_attachment/terraform/ec2.tf::aws_security_group.ec2_server",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/rce_web_app/terraform/ec2.tf::aws_security_group.ec2_ssh",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/rce_web_app/terraform/lb.tf::aws_security_group.lb_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.allow_mysql",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/scenario_template/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/secrets_in_the_cloud/terraform/ec2_instance.tf::aws_security_group.web_app_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/static/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/vpc_peering_overexposed/terraform/vpc.tf::aws_security_group.dev_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/codebuild_secrets/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/codebuild_secrets/terraform/rds.tf::aws_security_group.cg-rds-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/data_secrets/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/ec2_ssrf/terraform/ec2.tf::aws_security_group.ec2_security_group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/ecs_efs_attack/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/ecs_efs_attack/terraform/ecs.tf::aws_security_group.cg-ecs-http-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/ecs_privesc_evade_protection/terraform/vpc.tf::aws_security_group.allow_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/ecs_takeover/terraform/vpc.tf::aws_security_group.ecs_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/iam_privesc_by_attachment/terraform/ec2.tf::aws_security_group.ec2_server",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/rce_web_app/terraform/ec2.tf::aws_security_group.ec2_ssh",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/rce_web_app/terraform/lb.tf::aws_security_group.lb_http",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.allow_mysql",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/scenario_template/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/secrets_in_the_cloud/terraform/ec2_instance.tf::aws_security_group.web_app_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.ec2",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/sqs_flag_shop/terraform/security_groups.tf::aws_security_group.rds",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/static/terraform/ec2.tf::aws_security_group.sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/vpc_peering_overexposed/terraform/vpc.tf::aws_security_group.dev_sg",
+          "from": 0,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "from": 1,
+          "to": null,
+          "reason": "CloudGoat security groups take cidr_blocks = var.cg_whitelist, documented as 'User's public IP address(es)' with no default. Exposure depends on what the operator types, so the true label is undefined. Every SSH/RDP/all-ports label on those groups is excluded."
+        }
+      ],
+      "mismatches_raw": [
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/cloud_breach_s3/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/data_secrets/terraform/ec2.tf::aws_security_group.sg",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ec2_ssrf/terraform/ec2.tf::aws_security_group.ec2_security_group",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/ecs_efs_attack/terraform/ec2.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.ec2",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rce_web_app/terraform/ec2.tf::aws_security_group.ec2_ssh",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/rds_snapshot/terraform/vpc.tf::aws_security_group.cg-ec2-ssh-security-group",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/scenario_template/terraform/ec2.tf::aws_security_group.sg",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/secrets_in_the_cloud/terraform/ec2_instance.tf::aws_security_group.web_app_sg",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/static/terraform/ec2.tf::aws_security_group.sg",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_SSH",
+          "key": "/vpc_peering_overexposed/terraform/vpc.tf::aws_security_group.dev_sg",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_RDP",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "checkov": 1,
+          "detector": 0
+        },
+        {
+          "rule": "SG_OPEN_ALL_PORTS",
+          "key": "/glue_privesc/terraform/security_groups.tf::aws_security_group.glue",
+          "checkov": 1,
+          "detector": 0
+        }
+      ],
+      "beyond_checkov": {},
+      "findings_total": 61
+    }
+  },
+  "e2": {
+    "terragoat": {
+      "runs": [
+        {
+          "run": 1,
+          "findings": 16,
+          "status": {
+            "HEALED": 16
+          },
+          "auto_fixable": 16,
+          "healed_or_resolved": 16,
+          "heal_rate": 1.0,
+          "residual_after": {},
+          "total_ms": 985.8,
+          "detect_ms": 240.9
+        },
+        {
+          "run": 2,
+          "findings": 16,
+          "status": {
+            "HEALED": 16
+          },
+          "auto_fixable": 16,
+          "healed_or_resolved": 16,
+          "heal_rate": 1.0,
+          "residual_after": {},
+          "total_ms": 1130.1,
+          "detect_ms": 326.4
+        },
+        {
+          "run": 3,
+          "findings": 16,
+          "status": {
+            "HEALED": 16
+          },
+          "auto_fixable": 16,
+          "healed_or_resolved": 16,
+          "heal_rate": 1.0,
+          "residual_after": {},
+          "total_ms": 873.5,
+          "detect_ms": 296.0
+        },
+        {
+          "run": 4,
+          "findings": 16,
+          "status": {
+            "HEALED": 16
+          },
+          "auto_fixable": 16,
+          "healed_or_resolved": 16,
+          "heal_rate": 1.0,
+          "residual_after": {},
+          "total_ms": 753.9,
+          "detect_ms": 242.3
+        },
+        {
+          "run": 5,
+          "findings": 16,
+          "status": {
+            "HEALED": 16
+          },
+          "auto_fixable": 16,
+          "healed_or_resolved": 16,
+          "heal_rate": 1.0,
+          "residual_after": {},
+          "total_ms": 1889.2,
+          "detect_ms": 233.3
+        }
+      ],
+      "timings_ms": {
+        "detect": {
+          "mean": 267.777,
+          "std": 36.86,
+          "median": 242.282,
+          "p95": 296.027,
+          "n": 5
+        },
+        "decide": {
+          "mean": 0.003,
+          "std": 0.001,
+          "median": 0.003,
+          "p95": 0.004,
+          "n": 80
+        },
+        "fix": {
+          "mean": 13.513,
+          "std": 26.902,
+          "median": 1.742,
+          "p95": 77.384,
+          "n": 80
+        },
+        "verify": {
+          "mean": 7.606,
+          "std": 2.662,
+          "median": 7.332,
+          "p95": 10.982,
+          "n": 80
+        },
+        "mttr:S3_PUBLIC_ACCESS": {
+          "mean": 21.508,
+          "std": 24.534,
+          "median": 12.133,
+          "p95": 82.87,
+          "n": 30
+        },
+        "mttr:SG_OPEN_SSH": {
+          "mean": 89.358,
+          "std": 26.341,
+          "median": 87.482,
+          "p95": 105.003,
+          "n": 5
+        },
+        "mttr:CLOUDTRAIL_MISSING": {
+          "mean": 42.175,
+          "std": 13.613,
+          "median": 40.671,
+          "p95": 45.421,
+          "n": 5
+        },
+        "mttr:S3_NO_KMS_ENCRYPTION": {
+          "mean": 9.787,
+          "std": 1.958,
+          "median": 8.778,
+          "p95": 13.143,
+          "n": 25
+        },
+        "mttr:S3_VERSIONING_DISABLED": {
+          "mean": 9.481,
+          "std": 1.664,
+          "median": 8.833,
+          "p95": 12.685,
+          "n": 15
+        }
+      },
+      "by_rule_last_run": {
+        "S3_PUBLIC_ACCESS": {
+          "HEALED": 6
+        },
+        "SG_OPEN_SSH": {
+          "HEALED": 1
+        },
+        "CLOUDTRAIL_MISSING": {
+          "HEALED": 1
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "HEALED": 5
+        },
+        "S3_VERSIONING_DISABLED": {
+          "HEALED": 3
+        }
+      },
+      "heal_rate_mean": 1.0
+    },
+    "sadcloud": {
+      "runs": [
+        {
+          "run": 1,
+          "findings": 31,
+          "status": {
+            "HEALED": 25,
+            "ESCALATED": 2,
+            "ALREADY_RESOLVED": 4
+          },
+          "auto_fixable": 29,
+          "healed_or_resolved": 29,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 886.7,
+          "detect_ms": 256.6
+        },
+        {
+          "run": 2,
+          "findings": 31,
+          "status": {
+            "HEALED": 25,
+            "ESCALATED": 2,
+            "ALREADY_RESOLVED": 4
+          },
+          "auto_fixable": 29,
+          "healed_or_resolved": 29,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 899.4,
+          "detect_ms": 264.2
+        },
+        {
+          "run": 3,
+          "findings": 31,
+          "status": {
+            "HEALED": 25,
+            "ESCALATED": 2,
+            "ALREADY_RESOLVED": 4
+          },
+          "auto_fixable": 29,
+          "healed_or_resolved": 29,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 2353.7,
+          "detect_ms": 279.5
+        },
+        {
+          "run": 4,
+          "findings": 31,
+          "status": {
+            "HEALED": 25,
+            "ESCALATED": 2,
+            "ALREADY_RESOLVED": 4
+          },
+          "auto_fixable": 29,
+          "healed_or_resolved": 29,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 1046.3,
+          "detect_ms": 281.0
+        },
+        {
+          "run": 5,
+          "findings": 31,
+          "status": {
+            "HEALED": 25,
+            "ESCALATED": 2,
+            "ALREADY_RESOLVED": 4
+          },
+          "auto_fixable": 29,
+          "healed_or_resolved": 29,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 1298.7,
+          "detect_ms": 302.4
+        }
+      ],
+      "timings_ms": {
+        "detect": {
+          "mean": 276.75,
+          "std": 15.773,
+          "median": 279.532,
+          "p95": 281.021,
+          "n": 5
+        },
+        "decide": {
+          "mean": 0.003,
+          "std": 0.006,
+          "median": 0.003,
+          "p95": 0.004,
+          "n": 125
+        },
+        "fix": {
+          "mean": 8.653,
+          "std": 24.494,
+          "median": 2.094,
+          "p95": 30.341,
+          "n": 125
+        },
+        "verify": {
+          "mean": 6.915,
+          "std": 3.211,
+          "median": 7.002,
+          "p95": 10.839,
+          "n": 125
+        },
+        "mttr:SG_OPEN_ALL_PORTS": {
+          "mean": 64.368,
+          "std": 63.477,
+          "median": 49.73,
+          "p95": 134.695,
+          "n": 10
+        },
+        "mttr:S3_PUBLIC_ACCESS": {
+          "mean": 15.26,
+          "std": 10.744,
+          "median": 11.734,
+          "p95": 40.462,
+          "n": 30
+        },
+        "mttr:SG_OPEN_SSH": {
+          "mean": 9.331,
+          "std": 2.066,
+          "median": 9.121,
+          "p95": 10.896,
+          "n": 10
+        },
+        "mttr:SG_OPEN_RDP": {
+          "mean": 10.516,
+          "std": 2.063,
+          "median": 11.598,
+          "p95": 11.858,
+          "n": 5
+        },
+        "mttr:S3_NO_KMS_ENCRYPTION": {
+          "mean": 10.835,
+          "std": 3.485,
+          "median": 9.205,
+          "p95": 13.396,
+          "n": 30
+        },
+        "mttr:CLOUDTRAIL_NOT_MULTI_REGION": {
+          "mean": 10.074,
+          "std": 7.536,
+          "median": 8.28,
+          "p95": 17.661,
+          "n": 10
+        },
+        "mttr:CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "mean": 4.255,
+          "std": 0.951,
+          "median": 3.822,
+          "p95": 4.877,
+          "n": 5
+        },
+        "mttr:S3_VERSIONING_DISABLED": {
+          "mean": 10.082,
+          "std": 2.008,
+          "median": 8.854,
+          "p95": 13.273,
+          "n": 25
+        }
+      },
+      "by_rule_last_run": {
+        "SG_OPEN_ALL_PORTS": {
+          "HEALED": 2
+        },
+        "IAM_ADMIN_WILDCARD": {
+          "ESCALATED": 2
+        },
+        "S3_PUBLIC_ACCESS": {
+          "HEALED": 6
+        },
+        "SG_OPEN_SSH": {
+          "ALREADY_RESOLVED": 2,
+          "HEALED": 2
+        },
+        "SG_OPEN_RDP": {
+          "ALREADY_RESOLVED": 2,
+          "HEALED": 1
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "HEALED": 6
+        },
+        "CLOUDTRAIL_NOT_MULTI_REGION": {
+          "HEALED": 2
+        },
+        "CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "HEALED": 1
+        },
+        "S3_VERSIONING_DISABLED": {
+          "HEALED": 5
+        }
+      },
+      "heal_rate_mean": 1.0
+    },
+    "cloudgoat": {
+      "runs": [
+        {
+          "run": 1,
+          "findings": 61,
+          "status": {
+            "ESCALATED": 2,
+            "HEALED": 59
+          },
+          "auto_fixable": 59,
+          "healed_or_resolved": 59,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 2980.1,
+          "detect_ms": 574.3
+        },
+        {
+          "run": 2,
+          "findings": 61,
+          "status": {
+            "ESCALATED": 2,
+            "HEALED": 59
+          },
+          "auto_fixable": 59,
+          "healed_or_resolved": 59,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 1920.4,
+          "detect_ms": 593.9
+        },
+        {
+          "run": 3,
+          "findings": 61,
+          "status": {
+            "ESCALATED": 2,
+            "HEALED": 59
+          },
+          "auto_fixable": 59,
+          "healed_or_resolved": 59,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 2098.7,
+          "detect_ms": 593.5
+        },
+        {
+          "run": 4,
+          "findings": 61,
+          "status": {
+            "ESCALATED": 2,
+            "HEALED": 59
+          },
+          "auto_fixable": 59,
+          "healed_or_resolved": 59,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 3120.0,
+          "detect_ms": 1801.9
+        },
+        {
+          "run": 5,
+          "findings": 61,
+          "status": {
+            "ESCALATED": 2,
+            "HEALED": 59
+          },
+          "auto_fixable": 59,
+          "healed_or_resolved": 59,
+          "heal_rate": 1.0,
+          "residual_after": {
+            "IAM_ADMIN_WILDCARD": 2
+          },
+          "total_ms": 2721.6,
+          "detect_ms": 601.9
+        }
+      ],
+      "timings_ms": {
+        "detect": {
+          "mean": 833.127,
+          "std": 484.471,
+          "median": 593.912,
+          "p95": 601.948,
+          "n": 5
+        },
+        "decide": {
+          "mean": 0.003,
+          "std": 0.002,
+          "median": 0.003,
+          "p95": 0.003,
+          "n": 295
+        },
+        "fix": {
+          "mean": 7.369,
+          "std": 57.871,
+          "median": 1.66,
+          "p95": 3.234,
+          "n": 295
+        },
+        "verify": {
+          "mean": 7.606,
+          "std": 2.307,
+          "median": 7.238,
+          "p95": 10.626,
+          "n": 295
+        },
+        "mttr:S3_PUBLIC_ACCESS": {
+          "mean": 14.001,
+          "std": 16.001,
+          "median": 9.021,
+          "p95": 35.401,
+          "n": 90
+        },
+        "mttr:SG_OPEN_SSH": {
+          "mean": 265.229,
+          "std": 356.004,
+          "median": 91.981,
+          "p95": 123.496,
+          "n": 5
+        },
+        "mttr:S3_NO_KMS_ENCRYPTION": {
+          "mean": 8.951,
+          "std": 1.179,
+          "median": 8.551,
+          "p95": 11.666,
+          "n": 95
+        },
+        "mttr:CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "mean": 8.003,
+          "std": 4.07,
+          "median": 8.101,
+          "p95": 12.353,
+          "n": 10
+        },
+        "mttr:CLOUDTRAIL_NOT_MULTI_REGION": {
+          "mean": 3.974,
+          "std": 0.505,
+          "median": 3.758,
+          "p95": 4.021,
+          "n": 5
+        },
+        "mttr:S3_VERSIONING_DISABLED": {
+          "mean": 9.799,
+          "std": 1.484,
+          "median": 9.303,
+          "p95": 12.452,
+          "n": 90
+        }
+      },
+      "by_rule_last_run": {
+        "IAM_ADMIN_WILDCARD": {
+          "ESCALATED": 2
+        },
+        "S3_PUBLIC_ACCESS": {
+          "HEALED": 18
+        },
+        "SG_OPEN_SSH": {
+          "HEALED": 1
+        },
+        "S3_NO_KMS_ENCRYPTION": {
+          "HEALED": 19
+        },
+        "CLOUDTRAIL_NO_LOG_VALIDATION": {
+          "HEALED": 2
+        },
+        "CLOUDTRAIL_NOT_MULTI_REGION": {
+          "HEALED": 1
+        },
+        "S3_VERSIONING_DISABLED": {
+          "HEALED": 18
+        }
+      },
+      "heal_rate_mean": 1.0
+    }
+  },
+  "e3": [
+    {
+      "error_rate": 0.0,
+      "config": "guardrail+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.0,
+      "config": "guardrail+fallback+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.0,
+      "config": "no-guardrail+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.0,
+      "config": "no-guardrail,no-verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.1,
+      "config": "guardrail+verify",
+      "n": 522,
+      "true_fix_rate": 0.8525,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.1494,
+      "invented_tool": 28
+    },
+    {
+      "error_rate": 0.1,
+      "config": "guardrail+fallback+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.1,
+      "config": "no-guardrail+verify",
+      "n": 517,
+      "true_fix_rate": 0.8607,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.087,
+      "blocked_rate": 0.0,
+      "invented_tool": 28
+    },
+    {
+      "error_rate": 0.1,
+      "config": "no-guardrail,no-verify",
+      "n": 517,
+      "true_fix_rate": 0.8607,
+      "false_heal_claim_rate": 0.0851,
+      "wrong_tool_executed_rate": 0.087,
+      "blocked_rate": 0.0,
+      "invented_tool": 28
+    },
+    {
+      "error_rate": 0.2,
+      "config": "guardrail+verify",
+      "n": 524,
+      "true_fix_rate": 0.7824,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.2214,
+      "invented_tool": 36
+    },
+    {
+      "error_rate": 0.2,
+      "config": "guardrail+fallback+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.2,
+      "config": "no-guardrail+verify",
+      "n": 517,
+      "true_fix_rate": 0.8027,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.1393,
+      "blocked_rate": 0.0,
+      "invented_tool": 35
+    },
+    {
+      "error_rate": 0.2,
+      "config": "no-guardrail,no-verify",
+      "n": 517,
+      "true_fix_rate": 0.8027,
+      "false_heal_claim_rate": 0.1335,
+      "wrong_tool_executed_rate": 0.1393,
+      "blocked_rate": 0.0,
+      "invented_tool": 35
+    },
+    {
+      "error_rate": 0.3,
+      "config": "guardrail+verify",
+      "n": 526,
+      "true_fix_rate": 0.73,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.2795,
+      "invented_tool": 54
+    },
+    {
+      "error_rate": 0.3,
+      "config": "guardrail+fallback+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.3,
+      "config": "no-guardrail+verify",
+      "n": 519,
+      "true_fix_rate": 0.7495,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.1638,
+      "blocked_rate": 0.0,
+      "invented_tool": 52
+    },
+    {
+      "error_rate": 0.3,
+      "config": "no-guardrail,no-verify",
+      "n": 519,
+      "true_fix_rate": 0.7495,
+      "false_heal_claim_rate": 0.1561,
+      "wrong_tool_executed_rate": 0.1638,
+      "blocked_rate": 0.0,
+      "invented_tool": 52
+    },
+    {
+      "error_rate": 0.5,
+      "config": "guardrail+verify",
+      "n": 534,
+      "true_fix_rate": 0.5262,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.4869,
+      "invented_tool": 82
+    },
+    {
+      "error_rate": 0.5,
+      "config": "guardrail+fallback+verify",
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.0,
+      "blocked_rate": 0.0,
+      "invented_tool": 0
+    },
+    {
+      "error_rate": 0.5,
+      "config": "no-guardrail+verify",
+      "n": 522,
+      "true_fix_rate": 0.5709,
+      "false_heal_claim_rate": 0.0,
+      "wrong_tool_executed_rate": 0.3084,
+      "blocked_rate": 0.0,
+      "invented_tool": 79
+    },
+    {
+      "error_rate": 0.5,
+      "config": "no-guardrail,no-verify",
+      "n": 522,
+      "true_fix_rate": 0.5709,
+      "false_heal_claim_rate": 0.2874,
+      "wrong_tool_executed_rate": 0.3084,
+      "blocked_rate": 0.0,
+      "invented_tool": 79
+    }
+  ],
+  "e4": [
+    {
+      "scenario": "baseline",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.962
+    },
+    {
+      "scenario": "baseline",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.962
+    },
+    {
+      "scenario": "stale reads k=2",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.962
+    },
+    {
+      "scenario": "stale reads k=2",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.962
+    },
+    {
+      "scenario": "stale reads k=6",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 1.923
+    },
+    {
+      "scenario": "stale reads k=6",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.962
+    },
+    {
+      "scenario": "partial fix p=0.3",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 1.221
+    },
+    {
+      "scenario": "partial fix p=0.3",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 0.7404,
+      "false_heal_claim_rate": 0.2596,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.975
+    },
+    {
+      "scenario": "transient error p=0.2",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 1.121
+    },
+    {
+      "scenario": "transient error p=0.2",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 0.8385,
+      "false_heal_claim_rate": 0.1615,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.967
+    },
+    {
+      "scenario": "all faults",
+      "verification": true,
+      "n": 520,
+      "true_fix_rate": 1.0,
+      "false_heal_claim_rate": 0.0,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 1.415
+    },
+    {
+      "scenario": "all faults",
+      "verification": false,
+      "n": 520,
+      "true_fix_rate": 0.5442,
+      "false_heal_claim_rate": 0.4558,
+      "unconfirmed_but_fixed_rate": 0.0,
+      "avg_attempts": 0.975
+    }
+  ],
+  "e5": {
+    "out_of_policy_calls": 10,
+    "blocked": 10,
+    "verifier_write_actions_denied": 22,
+    "verifier_write_actions_total": 22,
+    "remediator_write_actions": [
+      "cloudtrail:CreateTrail",
+      "cloudtrail:StartLogging",
+      "cloudtrail:UpdateTrail",
+      "ec2:AuthorizeSecurityGroupIngress",
+      "ec2:RevokeSecurityGroupIngress",
+      "iam:CreatePolicyVersion",
+      "iam:DeletePolicyVersion",
+      "iam:PutRolePolicy",
+      "iam:PutUserPolicy",
+      "s3:CreateBucket",
+      "s3:PutBucketAcl",
+      "s3:PutBucketPublicAccessBlock",
+      "s3:PutBucketVersioning",
+      "s3:PutEncryptionConfiguration",
+      "sts:GetCallerIdentity"
+    ]
+  }
+}
